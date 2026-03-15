@@ -7,20 +7,40 @@ import { Building2, Package, MapPin, Phone, Mail, User, ChevronDown, Send, Check
 import parasJiLogo from "@/assets/paras-ji-logo.png";
 
 const productVariants = [
-  // PAPAD
-  { id: "papad-urad", category: "Papad", name: "Classic Urad Dal Papad (Black Gram)" },
-  { id: "papad-moong", category: "Papad", name: "Moong Dal Papad (Green Gram)" },
-  { id: "papad-chana", category: "Papad", name: "Chana Papad (Chickpea)" },
-  { id: "papad-sabudana", category: "Papad", name: "Sabudana Papad (Tapioca)" },
-  // SEVAIYAN
-  { id: "sev-moong", category: "Sevaiyan", name: "Moong Badi Sevaiyan" },
-  { id: "sev-mehandi", category: "Sevaiyan", name: "Mehandi ki Sevaiyan" },
-  // PAPADI
-  { id: "papadi-makke", category: "Papadi", name: "Jawahar Makke Chawal Papadi" },
-  { id: "papadi-urad", category: "Papadi", name: "Urad Dal Papadi (Black Gram)" },
-  { id: "papadi-moong", category: "Papadi", name: "Moong Dal Papadi (Green Gram)" },
-  { id: "papadi-chana", category: "Papadi", name: "Chana Papadi (Chickpea)" },
-  { id: "papadi-sabudana", category: "Papadi", name: "Sabudana Papadi (Tapioca)" },
+  // MOONG PAPAD
+  { id: "moong-special", category: "Moong Papad", name: "Moong Special Papad" },
+  { id: "moong-punjabi", category: "Moong Papad", name: "Moong Punjabi Papad" },
+  { id: "moong-lasun", category: "Moong Papad", name: "Moong Lasun Papad" },
+  { id: "moong-sindhi", category: "Moong Papad", name: "Moong Sindhi Papad" },
+  { id: "moong-urad", category: "Moong Papad", name: "Moong Urad Papad" },
+  // CHANA PAPAD
+  { id: "chana-masala", category: "Chana Papad", name: "Chana Masala Papad" },
+  { id: "chana-lasun", category: "Chana Papad", name: "Chana Lasun Papad" },
+  { id: "chana-methi", category: "Chana Papad", name: "Chana Methi Papad" },
+  { id: "chana-metha", category: "Chana Papad", name: "Chana Metha Papad" },
+  // KEECHE PAPAD
+  { id: "makka-keeche", category: "Keeche Papad", name: "Makka Papad (Keeche)" },
+  { id: "chawal-keeche", category: "Keeche Papad", name: "Chawal Papad (Keeche)" },
+  { id: "jawar-keeche", category: "Keeche Papad", name: "Jawar Papad (Keeche)" },
+  { id: "maida-keeche", category: "Keeche Papad", name: "Maida Papad (Keeche)" },
+  // BADI
+  { id: "moong-badi", category: "Badi", name: "Moong Badi" },
+  { id: "urad-badi", category: "Badi", name: "Urad Badi" },
+  { id: "chawla-badi", category: "Badi", name: "Chawla Badi" },
+  // SEWAIYA
+  { id: "aata-sewaiya", category: "Sewaiya", name: "Aata Sewaiya" },
+  { id: "maida-sewaiya", category: "Sewaiya", name: "Maida Sewaiya" },
+  { id: "suji-sewaiya", category: "Sewaiya", name: "Suji Sewaiya" },
+  // KURLAI
+  { id: "chawal-kurlai", category: "Kurlai", name: "Chawal Kurlai" },
+  { id: "maida-kurlai", category: "Kurlai", name: "Maida Kurlai" },
+  { id: "makka-kurlai", category: "Kurlai", name: "Makka Kurlai" },
+  // SEEDS
+  { id: "pumpkin-seeds", category: "Seeds", name: "Pumpkin Seeds" },
+  { id: "sunflower-seeds", category: "Seeds", name: "Sunflower Seeds" },
+  { id: "sabja-seeds", category: "Seeds", name: "Sweet Basil Seeds (Sabja)" },
+  { id: "chia-seeds", category: "Seeds", name: "Chia Seeds" },
+  { id: "watermelon-seeds", category: "Seeds", name: "Watermelon Seed / Kernels" },
 ];
 
 const packagingSizes = ["500g", "1 kg", "2 kg", "5 kg", "10 kg", "25 kg", "50 kg", "100 kg"];

@@ -45,7 +45,7 @@ export const LandingPage = () => {
             <br />of Paras-Ji
           </h1>
           <p className="text-background/80 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
-            Authentic Indian Papad, Sevaiyan & Papadi — handcrafted with love, delivered to your doorstep.
+            Authentic Indian Papad, Badi, Sewaiya & Seeds — handcrafted with love, delivered to your doorstep.
           </p>
 
           {/* TWO MAIN BUTTONS */}

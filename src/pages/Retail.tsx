@@ -10,15 +10,19 @@ import productSevaiyan from "@/assets/product-sevaiyan.jpg";
 import productPapadi from "@/assets/product-papadi.jpg";
 
 const categoryImages: Record<string, string> = {
-  papad: productPapad,
-  sevaiyan: productSevaiyan,
-  papadi: productPapadi,
+  "moong-papad": productPapad,
+  "chana-papad": productPapad,
+  "keeche-papad": productPapad,
+  badi: productSevaiyan,
+  sewaiya: productSevaiyan,
+  kurlai: productPapadi,
+  seeds: productPapadi,
 };
 
-const categories = ["all", "papad", "sevaiyan", "papadi"] as const;
+const categories = ["all", "moong-papad", "chana-papad", "keeche-papad", "badi", "sewaiya", "kurlai", "seeds"] as const;
 
 const RetailPage = () => {
-  const [activeCategory, setActiveCategory] = useState<"all" | "papad" | "sevaiyan" | "papadi">("all");
+  const [activeCategory, setActiveCategory] = useState<typeof categories[number]>("all");
 
   const filtered = activeCategory === "all"
     ? products
@@ -48,7 +52,7 @@ const RetailPage = () => {
             Our Products
           </h1>
           <p className="text-primary-foreground/70 text-base max-w-lg">
-            Explore our authentic range of Papad, Sevaiyan & Papadi — crafted with traditional recipes.
+            Explore our authentic range of Papad, Badi, Sewaiya & Seeds — crafted with traditional recipes.
           </p>
         </div>
       </div>
@@ -68,7 +72,7 @@ const RetailPage = () => {
             >
               {cat === "all"
                 ? "All Products"
-                : `${categoryMeta[cat].label} (${categoryMeta[cat].hindiLabel})`}
+                : `${categoryMeta[cat].label}`}
             </button>
           ))}
         </div>
@@ -76,9 +80,10 @@ const RetailPage = () => {
 
       {/* Products */}
       <div className="container mx-auto px-4 py-12">
-        {(activeCategory === "all" ? (["papad", "sevaiyan", "papadi"] as const) : [activeCategory]).map(
+        {(activeCategory === "all" ? (categories.filter(c => c !== "all")) : [activeCategory]).map(
           (cat) => {
             const catProducts = products.filter((p) => p.category === cat);
+            if (catProducts.length === 0) return null;
             return (
               <div key={cat} className="mb-14">
                 {/* Category Header */}
