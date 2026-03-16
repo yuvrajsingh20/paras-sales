@@ -5,142 +5,133 @@ import { ArrowRight, Leaf, Shield, Award } from "lucide-react";
 
 export const LandingPage = () => {
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Navbar */}
-      <nav className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-6 md:px-16 py-4">
-        <div className="flex items-center gap-2">
-          <img src={parasJiLogo} alt="Paras-Ji" className="h-10 w-10 object-contain" />
-          <span className="font-display font-bold text-xl text-background tracking-wide drop-shadow">Paras-Ji</span>
-        </div>
+    <div className="min-h-screen bg-background flex flex-col text-foreground transition-page">
+      {/* Navbar Overlay */}
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 md:px-16 py-6 bg-background/80 backdrop-blur-xl border-b border-border/50">
         <div className="flex items-center gap-3">
-          <a href="#about" className="hidden md:block text-background/80 hover:text-background text-sm font-medium transition-colors">About</a>
-          <Link
-            to="/wholesale"
-            className="hidden md:block text-background/80 hover:text-background text-sm font-medium transition-colors"
-          >
-            Wholesale
-          </Link>
+          <img src={parasJiLogo} alt="Paras-Ji" className="h-10 w-10 object-contain" />
+          <span className="font-bold text-xl tracking-tight text-primary">Paras-Ji</span>
+        </div>
+        <div className="flex items-center gap-8">
+          <Link to="/retail" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Products</Link>
+          <a href="#about" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Our Story</a>
+          <Link to="/wholesale" className="btn-primary py-2 px-5 text-xs">Wholesale</Link>
         </div>
       </nav>
 
-      {/* Hero */}
-      <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
-        {/* Background */}
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${heroBg})` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-900/60 via-brand-800/40 to-brand-900/70" />
-
-        {/* Content */}
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto animate-fade-up">
-          <div className="inline-flex items-center gap-2 bg-background/20 backdrop-blur-sm border border-background/30 rounded-full px-4 py-1.5 mb-6">
-            <Leaf className="h-4 w-4 text-brand-200" />
-            <span className="text-background text-sm font-medium">100% Pure & Natural Products</span>
+      {/* Hero Section */}
+      <section className="relative min-h-[95vh] flex items-center justify-center pt-32 pb-20 px-6 overflow-hidden">
+        {/* Video Background with Atmospheric Grading */}
+        <div className="absolute inset-0 z-0">
+          <video 
+            autoPlay 
+            muted 
+            loop 
+            playsInline 
+            preload="auto"
+            className="w-full h-full object-cover grayscale-[0.2] sepia-[0.1]"
+          >
+            <source src="/hero.webm" type="video/webm" />
+          </video>
+          
+          {/* Earthy Agricultural Gradient Overlay */}
+          <div className="absolute inset-0 hero-gradient-overlay mix-blend-multiply" />
+          
+          {/* Organic Grain Texture */}
+          <div className="absolute inset-0 grain-texture z-10" />
+          
+          {/* Subtle Sun Flare Glow */}
+          <div className="absolute top-0 right-0 w-full h-full bg-gradient-radial from-amber-200/20 to-transparent pointer-events-none" />
+        </div>
+        
+        <div className="container mx-auto max-w-5xl text-center relative z-20">
+          <div className="inline-flex items-center gap-2 bg-[#FAFAF5]/30 backdrop-blur-md border border-[#F5E6B3]/40 rounded-full px-4 py-1.5 mb-8 animate-in shadow-lg">
+            <Leaf className="h-4 w-4 text-[#E6B94C]" />
+            <span className="text-[#FAFAF5] text-[10px] font-black uppercase tracking-[0.2em] text-shadow-premium">Authentic Heritage</span>
           </div>
 
-          <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-background leading-tight mb-4 drop-shadow-lg">
-            Taste the{" "}
-            <span className="text-brand-200">Tradition</span>
-            <br />of Paras-Ji
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-8 leading-[1] text-[#FAFAF5] animate-in text-shadow-premium" style={{ animationDelay: '0.1s' }}>
+            Traditional taste, <br />
+            <span className="text-[#E6B94C] text-shadow-gold">refined for today.</span>
           </h1>
-          <p className="text-background/80 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
-            Authentic Indian Papad, Badi, Sewaiya & Seeds — handcrafted with love, delivered to your doorstep.
+          
+          <p className="text-lg md:text-xl text-[#FAFAF5] max-w-2xl mx-auto mb-12 animate-in font-semibold leading-relaxed text-shadow-premium opacity-90" style={{ animationDelay: '0.2s' }}>
+            Experience the soulful essence of Paras-Ji. Handcrafted varieties delivered with the warmth of Indian farmland tradition.
           </p>
 
-          {/* TWO MAIN BUTTONS */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              to="/retail"
-              className="group flex items-center gap-3 bg-background text-primary font-bold text-lg px-10 py-4 rounded-2xl shadow-2xl hover:shadow-brand-900/40 hover:-translate-y-1 transition-all duration-300 min-w-[200px] justify-center"
-            >
-              <span className="text-2xl">🛍️</span>
-              <div className="text-left">
-                <p className="text-xs text-muted-foreground font-normal leading-tight">For home & family</p>
-                <p className="leading-tight">Retail</p>
-              </div>
-              <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 animate-in" style={{ animationDelay: '0.3s' }}>
+            <Link to="/retail" className="btn-primary text-base px-10 py-4 group bg-[#4F7F52] hover:bg-[#5F9463] text-[#FAFAF5] shadow-2xl shadow-black/30 border border-white/10">
+              Shop Retail
+              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-2 transition-transform" />
             </Link>
-
-            <Link
-              to="/wholesale"
-              className="group flex items-center gap-3 bg-primary text-primary-foreground font-bold text-lg px-10 py-4 rounded-2xl shadow-2xl border-2 border-background/30 hover:-translate-y-1 transition-all duration-300 min-w-[200px] justify-center"
-            >
-              <span className="text-2xl">🏭</span>
-              <div className="text-left">
-                <p className="text-xs text-primary-foreground/70 font-normal leading-tight">Bulk orders & B2B</p>
-                <p className="leading-tight">Wholesale</p>
-              </div>
-              <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            <Link to="/wholesale" className="btn-outline text-base px-10 py-4 group border-[#FAFAF5]/40 text-[#FAFAF5] hover:bg-white/20 backdrop-blur-md shadow-xl text-shadow-premium font-bold">
+              Wholesale Inquiry
+              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-2 transition-transform" />
             </Link>
           </div>
-
-          {/* Stats */}
-          <div className="flex items-center justify-center gap-8 mt-12 flex-wrap">
-            {[
-              { icon: "🌿", label: "100% Natural", value: "No Preservatives" },
-              { icon: "⭐", label: "4.9 Rating", value: "10,000+ Happy Customers" },
-              { icon: "🚚", label: "Fast Delivery", value: "Pan India Shipping" },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center">
-                <p className="text-2xl">{stat.icon}</p>
-                <p className="text-background font-bold text-sm">{stat.label}</p>
-                <p className="text-background/60 text-xs">{stat.value}</p>
-              </div>
-            ))}
-          </div>
         </div>
+      </section>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float">
-          <div className="w-6 h-10 border-2 border-background/40 rounded-full flex items-start justify-center p-1">
-            <div className="w-1.5 h-3 bg-background/60 rounded-full animate-pulse" />
-          </div>
-        </div>
-      </div>
-
-      {/* About section */}
-      <section id="about" className="py-20 bg-background px-4">
-        <div className="container mx-auto max-w-5xl">
-          <div className="text-center mb-12">
-            <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-2">Our Story</p>
-            <h2 className="section-title">Pure. Natural. Traditional.</h2>
-            <p className="text-muted-foreground mt-4 max-w-xl mx-auto">
-              Paras-Ji brings you the finest quality Indian food products, made with traditional recipes passed down through generations.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { icon: <Leaf className="h-8 w-8 text-primary" />, title: "100% Natural", desc: "No artificial colours, flavours or preservatives. Pure ingredients from trusted farms." },
-              { icon: <Shield className="h-8 w-8 text-primary" />, title: "Quality Assured", desc: "Every batch is quality-tested to ensure you receive only the finest products." },
-              { icon: <Award className="h-8 w-8 text-primary" />, title: "Award Winning", desc: "Recognized for excellence in traditional food craftsmanship across India." },
-            ].map((item) => (
-              <div key={item.title} className="bg-brand-50 rounded-2xl p-6 text-center hover:shadow-md transition-shadow">
-                <div className="w-16 h-16 bg-secondary rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  {item.icon}
+      {/* Philosophy Section */}
+      <section id="about" className="py-24 bg-secondary/30 px-6">
+        <div className="container mx-auto max-w-7xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div>
+              <p className="text-primary font-bold text-sm uppercase tracking-widest mb-4">Our Philosophy</p>
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">Built on trust, <br />rooted in tradition.</h2>
+              <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+                For generations, Paras-Ji has stood for purity. We believe that the best flavors come from nature, which is why we meticulously source every ingredient and follow time-honored recipes that honor our heritage.
+              </p>
+              <div className="grid grid-cols-2 gap-8">
+                <div>
+                  <h4 className="font-bold text-2xl mb-1">100%</h4>
+                  <p className="text-sm text-muted-foreground font-medium uppercase tracking-wide">Natural Ingredients</p>
                 </div>
-                <h3 className="font-display font-bold text-lg text-foreground mb-2">{item.title}</h3>
-                <p className="text-muted-foreground text-sm">{item.desc}</p>
+                <div>
+                  <h4 className="font-bold text-2xl mb-1">40+</h4>
+                  <p className="text-sm text-muted-foreground font-medium uppercase tracking-wide">Years of Excellence</p>
+                </div>
               </div>
-            ))}
+            </div>
+            <div className="grid grid-cols-1 gap-6">
+              {[
+                { icon: <Leaf className="h-6 w-6" />, title: "Zero Additives", desc: "No artificial colors or preservatives. Just pure, wholesome food." },
+                { icon: <Shield className="h-6 w-6" />, title: "Rigorous Quality", desc: "Every batch undergoes strict quality checks before it leaves our kitchen." },
+                { icon: <Award className="h-6 w-6" />, title: "Authentic Recipes", desc: "Recipes passed down through generations, preserved with care." },
+              ].map((item) => (
+                <div key={item.title} className="bg-background p-8 rounded-2xl border border-border shadow-sm hover:shadow-md transition-shadow">
+                  <div className="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center text-primary mb-6">
+                    {item.icon}
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-primary text-primary-foreground py-10 px-4">
-        <div className="container mx-auto max-w-5xl flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <img src={parasJiLogo} alt="Paras-Ji" className="h-8 w-8 object-contain brightness-0 invert" />
-            <span className="font-display font-bold text-lg">Paras-Ji</span>
+      <footer className="bg-background border-t border-border py-16 px-8 mt-auto">
+        <div className="container mx-auto max-w-7xl">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8 border-b border-border pb-12 mb-12">
+            <div className="flex items-center gap-3">
+              <img src={parasJiLogo} alt="Paras-Ji" className="h-10 w-10 object-contain" />
+              <span className="font-bold text-2xl tracking-tighter text-primary">Paras-Ji</span>
+            </div>
+            <div className="flex gap-10">
+              <Link to="/retail" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Shop</Link>
+              <Link to="/wholesale" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Wholesale</Link>
+              <a href="#" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Contact</a>
+            </div>
           </div>
-          <p className="text-primary-foreground/70 text-sm text-center">
-            © 2024 Paras-Ji Foods. All rights reserved. | Pure · Natural · Traditional
-          </p>
-          <div className="flex gap-4 text-sm text-primary-foreground/70">
-            <span className="cursor-pointer hover:text-primary-foreground">Privacy</span>
-            <span className="cursor-pointer hover:text-primary-foreground">Terms</span>
-            <span className="cursor-pointer hover:text-primary-foreground">Contact</span>
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-muted-foreground text-xs font-medium">
+            <p>© 2024 Paras-Ji Foods. Crafted with tradition.</p>
+            <div className="flex gap-6">
+              <span className="hover:text-foreground cursor-pointer transition-colors">Privacy Policy</span>
+              <span className="hover:text-foreground cursor-pointer transition-colors">Terms of Service</span>
+            </div>
           </div>
         </div>
       </footer>

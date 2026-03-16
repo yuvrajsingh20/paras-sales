@@ -3,7 +3,7 @@ import { Navbar } from "@/components/Navbar";
 import { LoginModal } from "@/components/LoginModal";
 import { CartDrawer } from "@/components/CartDrawer";
 import { WishlistDrawer } from "@/components/WishlistDrawer";
-import { Building2, Package, MapPin, Phone, Mail, User, ChevronDown, Send, CheckCircle } from "lucide-react";
+import { Building2, Package, MapPin, Phone, Mail, User, ChevronDown, Send, CheckCircle, ArrowRight } from "lucide-react";
 import parasJiLogo from "@/assets/paras-ji-logo.png";
 
 const productVariants = [
@@ -83,8 +83,7 @@ const WholesalePage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Simulate API call / email notification
-    await new Promise((r) => setTimeout(r, 1500));
+    await new Promise((r) => setTimeout(r, 2000));
     setLoading(false);
     setSubmitted(true);
   };
@@ -96,292 +95,193 @@ const WholesalePage = () => {
   }, {} as Record<string, typeof productVariants>);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background transition-page">
       <Navbar />
       <CartDrawer />
       <WishlistDrawer />
       <LoginModal />
 
-      {/* Hero */}
-      <div className="bg-primary relative overflow-hidden">
-        <div className="container mx-auto px-4 py-16 relative z-10">
-          <div className="flex items-center gap-3 mb-4">
-            <Building2 className="h-8 w-8 text-brand-200" />
-            <p className="text-brand-200 text-sm font-semibold uppercase tracking-widest">B2B & Bulk Orders</p>
+      {/* Hero Overlay */}
+      <section className="relative pt-24 pb-16 px-6 bg-secondary/20">
+        <div className="container mx-auto max-w-6xl">
+          <div className="flex flex-col md:flex-row items-center gap-12">
+            <div className="flex-1 text-left animate-in">
+              <div className="inline-flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-widest mb-4">
+                <Building2 className="h-4 w-4" />
+                Global B2B Partner
+              </div>
+              <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
+                Wholesale <br />Collaborations.
+              </h1>
+              <p className="text-lg text-muted-foreground leading-relaxed max-w-lg mb-8">
+                Empower your business with the authentic taste of Paras-Ji. We offer customized bulk solutions, export-quality packaging, and consistent supply chains.
+              </p>
+              <div className="flex items-center gap-6 text-sm font-semibold text-primary">
+                <div className="flex items-center gap-2"><CheckCircle className="h-4 w-4" /> Export Quality</div>
+                <div className="flex items-center gap-2"><CheckCircle className="h-4 w-4" /> Global Delivery</div>
+              </div>
+            </div>
+            <div className="hidden md:block w-48 h-48 opacity-10 grayscale invert">
+               <img src={parasJiLogo} alt="" className="w-full h-full object-contain" />
+            </div>
           </div>
-          <h1 className="font-display text-3xl md:text-5xl font-bold text-primary-foreground mb-3">
-            Wholesale Enquiry
-          </h1>
-          <p className="text-primary-foreground/70 text-base max-w-xl">
-            Partner with Paras-Ji for bulk supply. Fill the form below and our team will contact you within 24 hours.
-          </p>
         </div>
-        <div className="absolute right-0 top-0 bottom-0 opacity-5 flex items-center justify-center pr-12">
-          <img src={parasJiLogo} alt="" className="h-48 w-48 object-contain brightness-0 invert" />
-        </div>
-      </div>
+      </section>
 
-      {submitted ? (
-        <div className="container mx-auto px-4 py-24 max-w-lg text-center">
-          <div className="bg-brand-50 rounded-3xl p-12 shadow-md">
-            <CheckCircle className="h-16 w-16 text-primary mx-auto mb-6" />
-            <h2 className="font-display text-2xl font-bold text-foreground mb-3">
-              Requirement Sent!
-            </h2>
-            <p className="text-muted-foreground mb-6">
-              Thank you for your enquiry. Our team will review your requirements and contact you via email & phone within 24 hours.
+      <main className="container mx-auto px-6 py-20 max-w-6xl">
+        {submitted ? (
+          <div className="flex flex-col items-center justify-center py-20 animate-in">
+            <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-8 shadow-inner">
+               <CheckCircle className="h-10 w-10" />
+            </div>
+            <h2 className="text-4xl font-bold tracking-tight mb-4">Inquiry Received</h2>
+            <p className="text-muted-foreground text-center max-w-md mb-10 leading-relaxed">
+              Our B2B relations team will review your requirements and reach out within 1 business day. Thank you for choosing Paras-Ji.
             </p>
             <button
               onClick={() => setSubmitted(false)}
               className="btn-primary"
             >
-              Submit Another Enquiry
+              Start New Inquiry
             </button>
           </div>
-        </div>
-      ) : (
-        <form onSubmit={handleSubmit} className="container mx-auto px-4 py-12 max-w-4xl">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Left: Contact Details */}
-            <div className="lg:col-span-1 space-y-6">
-              <div className="bg-brand-50 rounded-2xl p-6">
-                <h2 className="font-display font-bold text-lg text-foreground mb-5 flex items-center gap-2">
-                  <User className="h-5 w-5 text-primary" />
-                  Contact Details
-                </h2>
-                <div className="space-y-4">
-                  <InputField
-                    icon={<Building2 className="h-4 w-4" />}
-                    placeholder="Business / Company Name"
-                    value={form.businessName}
-                    onChange={(v) => setForm({ ...form, businessName: v })}
-                    required
-                  />
-                  <InputField
-                    icon={<User className="h-4 w-4" />}
-                    placeholder="Contact Person Name"
-                    value={form.contactName}
-                    onChange={(v) => setForm({ ...form, contactName: v })}
-                    required
-                  />
-                  <InputField
-                    icon={<Phone className="h-4 w-4" />}
-                    placeholder="Phone Number"
-                    type="tel"
-                    value={form.phone}
-                    onChange={(v) => setForm({ ...form, phone: v })}
-                    required
-                  />
-                  <InputField
-                    icon={<Mail className="h-4 w-4" />}
-                    placeholder="Email Address"
-                    type="email"
-                    value={form.email}
-                    onChange={(v) => setForm({ ...form, email: v })}
-                    required
-                  />
+        ) : (
+          <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+            {/* Form Left Side: Business Info */}
+            <div className="lg:col-span-5 space-y-12 animate-in" style={{ animationDelay: '0.1s' }}>
+              <div>
+                <h2 className="text-2xl font-bold tracking-tight mb-8 pb-4 border-b border-border/50">Business Identity</h2>
+                <div className="space-y-6">
+                  <InputField label="Company Name" placeholder="e.g. Parasji Distributors" icon={<Building2 className="h-4 w-4" />} />
+                  <InputField label="Contact Person" placeholder="Full Name" icon={<User className="h-4 w-4" />} />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <InputField label="Email" type="email" placeholder="business@email.com" icon={<Mail className="h-4 w-4" />} />
+                    <InputField label="Phone" type="tel" placeholder="+91 ..." icon={<Phone className="h-4 w-4" />} />
+                  </div>
                 </div>
               </div>
 
-              {/* Address */}
-              <div className="bg-brand-50 rounded-2xl p-6">
-                <h2 className="font-display font-bold text-lg text-foreground mb-5 flex items-center gap-2">
-                  <MapPin className="h-5 w-5 text-primary" />
-                  Delivery Address
-                </h2>
-                <div className="space-y-4">
-                  <textarea
-                    placeholder="Street Address"
-                    value={form.address}
-                    onChange={(e) => setForm({ ...form, address: e.target.value })}
-                    rows={2}
-                    className="w-full px-4 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring resize-none"
-                    required
-                  />
-                  <div className="grid grid-cols-2 gap-3">
-                    <input
-                      placeholder="City"
-                      value={form.city}
-                      onChange={(e) => setForm({ ...form, city: e.target.value })}
-                      className="w-full px-3 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-                      required
-                    />
-                    <input
-                      placeholder="State"
-                      value={form.state}
-                      onChange={(e) => setForm({ ...form, state: e.target.value })}
-                      className="w-full px-3 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-                      required
-                    />
+              <div>
+                <h2 className="text-2xl font-bold tracking-tight mb-8 pb-4 border-b border-border/50">Logistics</h2>
+                <div className="space-y-6">
+                   <div className="space-y-2">
+                    <label className="text-[10px] font-bold uppercase tracking-widest text-primary/60 ml-1">Street Address</label>
+                    <div className="relative">
+                      <span className="absolute left-4 top-4 text-muted-foreground"><MapPin className="h-4 w-4" /></span>
+                      <textarea 
+                        className="w-full bg-secondary/30 border border-transparent focus:border-primary/20 focus:bg-background h-24 rounded-2xl p-4 pl-12 text-sm outline-none transition-all resize-none" 
+                        placeholder="Warehouse or Office address"
+                      />
+                    </div>
                   </div>
-                  <input
-                    placeholder="PIN Code"
-                    value={form.pincode}
-                    onChange={(e) => setForm({ ...form, pincode: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-                    required
-                  />
+                  <div className="grid grid-cols-2 gap-4">
+                    <InputField label="City" placeholder="City" />
+                    <InputField label="ZIP Code" placeholder="000000" />
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Right: Order Items */}
-            <div className="lg:col-span-2">
-              <div className="bg-brand-50 rounded-2xl p-6">
-                <h2 className="font-display font-bold text-lg text-foreground mb-2 flex items-center gap-2">
-                  <Package className="h-5 w-5 text-primary" />
-                  Order Requirements
-                </h2>
-                <p className="text-sm text-muted-foreground mb-5">
-                  Add each product with desired quantity and packaging size.
-                </p>
-
-                <div className="space-y-4">
-                  {orderItems.map((item, idx) => (
-                    <div key={idx} className="bg-background rounded-xl p-4 border border-border">
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
-                          Item #{idx + 1}
-                        </span>
+            {/* Form Right Side: Requirements */}
+            <div className="lg:col-span-7 animate-in" style={{ animationDelay: '0.2s' }}>
+              <div className="bg-background rounded-[40px] border border-border/50 p-8 md:p-12 shadow-2xl shadow-primary/5">
+                <h2 className="text-2xl font-bold tracking-tight mb-2">Requirements</h2>
+                <p className="text-sm text-muted-foreground mb-10">Select products and approximate bulk quantities.</p>
+                
+                <div className="space-y-6">
+                   {orderItems.map((item, idx) => (
+                    <div key={idx} className="group relative bg-secondary/20 p-6 rounded-2xl border border-transparent hover:border-primary/10 transition-all duration-300">
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="text-[10px] font-bold text-primary/40 uppercase tracking-widest">Product #{idx + 1}</span>
                         {orderItems.length > 1 && (
-                          <button
-                            type="button"
-                            onClick={() => removeItem(idx)}
-                            className="text-xs text-destructive hover:text-destructive/80 font-medium"
-                          >
-                            Remove
-                          </button>
+                          <button onClick={() => removeItem(idx)} className="text-[10px] font-bold text-destructive hover:underline uppercase">Discard</button>
                         )}
                       </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        {/* Product Select */}
-                        <div className="sm:col-span-1 relative">
-                          <select
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="relative">
+                          <select 
+                            className="w-full bg-white border border-border/50 rounded-xl px-4 py-3 text-sm font-medium outline-none appearance-none cursor-pointer focus:border-primary transition-all"
                             value={item.productId}
                             onChange={(e) => updateItem(idx, "productId", e.target.value)}
-                            className="w-full appearance-none pl-3 pr-8 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-                            required
                           >
                             <option value="">Select Product</option>
                             {Object.entries(groupedProducts).map(([cat, prods]) => (
-                              <optgroup key={cat} label={`── ${cat} ──`}>
-                                {prods.map((p) => (
-                                  <option key={p.id} value={p.id}>
-                                    {p.name}
-                                  </option>
-                                ))}
-                              </optgroup>
+                               <optgroup key={cat} label={cat}>
+                                 {prods.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
+                               </optgroup>
                             ))}
                           </select>
-                          <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+                          <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 pointer-events-none text-muted-foreground" />
                         </div>
-
-                        {/* Quantity */}
-                        <input
-                          placeholder="Qty (e.g. 50)"
-                          type="number"
-                          min="1"
-                          value={item.quantity}
-                          onChange={(e) => updateItem(idx, "quantity", e.target.value)}
-                          className="w-full px-3 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-                          required
-                        />
-
-                        {/* Packaging */}
-                        <div className="relative">
-                          <select
-                            value={item.packaging}
-                            onChange={(e) => updateItem(idx, "packaging", e.target.value)}
-                            className="w-full appearance-none pl-3 pr-8 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-                            required
-                          >
-                            <option value="">Packaging</option>
-                            {packagingSizes.map((s) => (
-                              <option key={s} value={s}>{s}</option>
-                            ))}
-                          </select>
-                          <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+                        <div className="flex gap-2">
+                          <input 
+                            className="flex-grow bg-white border border-border/50 rounded-xl px-4 py-3 text-sm outline-none focus:border-primary transition-all" 
+                            placeholder="Qty (Kg)"
+                            value={item.quantity}
+                            onChange={(e) => updateItem(idx, "quantity", e.target.value)}
+                          />
+                           <div className="relative">
+                            <select 
+                              className="w-40 bg-white border border-border/50 rounded-xl px-4 py-3 text-sm font-medium outline-none appearance-none cursor-pointer focus:border-primary transition-all"
+                              value={item.packaging}
+                              onChange={(e) => updateItem(idx, "packaging", e.target.value)}
+                            >
+                               <option value="">Packaging</option>
+                               {packagingSizes.map(s => <option key={s} value={s}>{s}</option>)}
+                            </select>
+                            <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 pointer-events-none text-muted-foreground" />
+                          </div>
                         </div>
                       </div>
                     </div>
-                  ))}
+                   ))}
+
+                   <button 
+                     type="button" 
+                     onClick={addItem}
+                     className="w-full py-4 rounded-2xl border-2 border-dashed border-border text-muted-foreground hover:border-primary hover:text-primary hover:bg-primary/5 transition-all text-sm font-bold flex items-center justify-center gap-2"
+                   >
+                     + Add Product to Inquiry
+                   </button>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={addItem}
-                  className="mt-4 w-full py-3 rounded-xl border-2 border-dashed border-primary/40 text-primary hover:border-primary hover:bg-brand-50 text-sm font-semibold transition-all duration-200"
+                <div className="mt-12">
+                   <InputField label="Additional Notes" placeholder="Any specific requirements or export targets..." />
+                </div>
+
+                <button 
+                  type="submit" 
+                  disabled={loading}
+                  className="w-full btn-primary py-5 mt-10 rounded-2xl text-lg flex items-center justify-center gap-2 shadow-xl shadow-primary/20 hover:shadow-2xl hover:shadow-primary/30 transition-all disabled:opacity-50"
                 >
-                  + Add Another Product
+                  {loading ? "Processing..." : "Submit Proposal"}
+                  <ArrowRight className="h-5 w-5" />
                 </button>
+                <p className="text-center text-[10px] text-muted-foreground mt-4 font-medium uppercase tracking-widest">Confidential & Direct Submission</p>
               </div>
-
-              {/* Message */}
-              <div className="bg-brand-50 rounded-2xl p-6 mt-6">
-                <h2 className="font-display font-bold text-base text-foreground mb-3">
-                  Additional Notes
-                </h2>
-                <textarea
-                  placeholder="Any special requirements, delivery instructions, or questions..."
-                  value={form.message}
-                  onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  rows={3}
-                  className="w-full px-4 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring resize-none"
-                />
-              </div>
-
-              {/* Submit */}
-              <button
-                type="submit"
-                disabled={loading}
-                className="btn-primary w-full text-center mt-6 text-base py-4 flex items-center justify-center gap-2 disabled:opacity-70"
-              >
-                <Send className="h-5 w-5" />
-                {loading ? "Sending Requirement..." : "Send Requirement to Paras-Ji"}
-              </button>
-              <p className="text-center text-xs text-muted-foreground mt-2">
-                You will receive a confirmation email. Our team will call you within 24 hours.
-              </p>
             </div>
-          </div>
-        </form>
-      )}
+          </form>
+        )}
+      </main>
 
-      <footer className="bg-primary text-primary-foreground py-8 px-4 text-center mt-8">
-        <p className="text-primary-foreground/70 text-sm">
-          © 2024 Paras-Ji Foods · For wholesale queries: +91 98765 43210 · parasji@email.com
-        </p>
+      <footer className="bg-background border-t border-border py-12 text-center">
+        <p className="text-muted-foreground text-xs font-bold uppercase tracking-[0.2em]">Crafted For Business · Paras-Ji Foods B2B</p>
       </footer>
     </div>
   );
 };
 
-const InputField = ({
-  icon,
-  placeholder,
-  value,
-  onChange,
-  type = "text",
-  required,
-}: {
-  icon: React.ReactNode;
-  placeholder: string;
-  value: string;
-  onChange: (v: string) => void;
-  type?: string;
-  required?: boolean;
-}) => (
-  <div className="relative">
-    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">{icon}</span>
-    <input
-      type={type}
-      placeholder={placeholder}
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      required={required}
-      className="w-full pl-9 pr-4 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring transition-all"
-    />
+const InputField = ({ label, placeholder, icon, type = "text" }: { label: string; placeholder: string; icon?: React.ReactNode; type?: string }) => (
+  <div className="space-y-2 group">
+    <label className="text-[10px] font-bold uppercase tracking-widest text-primary/60 ml-1 transition-colors group-focus-within:text-primary">{label}</label>
+    <div className="relative">
+      {icon && <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-primary transition-colors">{icon}</span>}
+      <input 
+        type={type}
+        className={`w-full bg-secondary/30 border border-transparent focus:border-primary/20 focus:bg-background rounded-2xl p-4 ${icon ? 'pl-12' : 'pl-6'} text-sm outline-none transition-all placeholder:text-muted-foreground/50`} 
+        placeholder={placeholder} 
+      />
+    </div>
   </div>
 );
 

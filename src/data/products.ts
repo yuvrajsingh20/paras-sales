@@ -30,6 +30,8 @@ export const products: Product[] = [
     variants: [
       { id: "ms-1", name: "Moong Special", subtitle: "Special Blend", price: 90, weight: "200g" },
       { id: "ms-2", name: "Moong Special", subtitle: "Special Blend", price: 170, weight: "400g" },
+      { id: "ms-3", name: "Moong Special", subtitle: "Special Blend", price: 210, weight: "500g" },
+      { id: "ms-4", name: "Moong Special", subtitle: "Special Blend", price: 400, weight: "1kg" },
     ],
   },
   {
@@ -42,6 +44,8 @@ export const products: Product[] = [
     variants: [
       { id: "mp-1", name: "Moong Punjabi", subtitle: "Spicy Punjabi", price: 95, weight: "200g" },
       { id: "mp-2", name: "Moong Punjabi", subtitle: "Spicy Punjabi", price: 180, weight: "400g" },
+      { id: "mp-3", name: "Moong Punjabi", subtitle: "Spicy Punjabi", price: 220, weight: "500g" },
+      { id: "mp-4", name: "Moong Punjabi", subtitle: "Spicy Punjabi", price: 420, weight: "1kg" },
     ],
   },
   {
@@ -54,6 +58,8 @@ export const products: Product[] = [
     variants: [
       { id: "ml-1", name: "Moong Lasun", subtitle: "Garlic Flavor", price: 95, weight: "200g" },
       { id: "ml-2", name: "Moong Lasun", subtitle: "Garlic Flavor", price: 180, weight: "400g" },
+      { id: "ml-3", name: "Moong Lasun", subtitle: "Garlic Flavor", price: 220, weight: "500g" },
+      { id: "ml-4", name: "Moong Lasun", subtitle: "Garlic Flavor", price: 420, weight: "1kg" },
     ],
   },
   {
@@ -66,6 +72,8 @@ export const products: Product[] = [
     variants: [
       { id: "msi-1", name: "Moong Sindhi", subtitle: "Sindhi Special", price: 95, weight: "200g" },
       { id: "msi-2", name: "Moong Sindhi", subtitle: "Sindhi Special", price: 180, weight: "400g" },
+      { id: "msi-3", name: "Moong Sindhi", subtitle: "Sindhi Special", price: 220, weight: "500g" },
+      { id: "msi-4", name: "Moong Sindhi", subtitle: "Sindhi Special", price: 420, weight: "1kg" },
     ],
   },
   {
@@ -78,6 +86,8 @@ export const products: Product[] = [
     variants: [
       { id: "mu-1", name: "Moong Urad", subtitle: "Mixed Dal", price: 85, weight: "200g" },
       { id: "mu-2", name: "Moong Urad", subtitle: "Mixed Dal", price: 160, weight: "400g" },
+      { id: "mu-3", name: "Moong Urad", subtitle: "Mixed Dal", price: 200, weight: "500g" },
+      { id: "mu-4", name: "Moong Urad", subtitle: "Mixed Dal", price: 380, weight: "1kg" },
     ],
   },
 
@@ -93,6 +103,8 @@ export const products: Product[] = [
     variants: [
       { id: "cm-1", name: "Chana Masala", subtitle: "Spiced Chickpea", price: 90, weight: "200g" },
       { id: "cm-2", name: "Chana Masala", subtitle: "Spiced Chickpea", price: 170, weight: "400g" },
+      { id: "cm-3", name: "Chana Masala", subtitle: "Spiced Chickpea", price: 210, weight: "500g" },
+      { id: "cm-4", name: "Chana Masala", subtitle: "Spiced Chickpea", price: 400, weight: "1kg" },
     ],
   },
   {
@@ -105,6 +117,8 @@ export const products: Product[] = [
     variants: [
       { id: "cl-1", name: "Chana Lasun", subtitle: "Garlic Chickpea", price: 95, weight: "200g" },
       { id: "cl-2", name: "Chana Lasun", subtitle: "Garlic Chickpea", price: 180, weight: "400g" },
+      { id: "cl-3", name: "Chana Lasun", subtitle: "Garlic Chickpea", price: 220, weight: "500g" },
+      { id: "cl-4", name: "Chana Lasun", subtitle: "Garlic Chickpea", price: 420, weight: "1kg" },
     ],
   },
   {
@@ -117,6 +131,8 @@ export const products: Product[] = [
     variants: [
       { id: "cmt-1", name: "Chana Methi", subtitle: "Fenugreek Chickpea", price: 95, weight: "200g" },
       { id: "cmt-2", name: "Chana Methi", subtitle: "Fenugreek Chickpea", price: 180, weight: "400g" },
+      { id: "cmt-3", name: "Chana Methi", subtitle: "Fenugreek Chickpea", price: 220, weight: "500g" },
+      { id: "cmt-4", name: "Chana Methi", subtitle: "Fenugreek Chickpea", price: 420, weight: "1kg" },
     ],
   },
   {
@@ -129,6 +145,8 @@ export const products: Product[] = [
     variants: [
       { id: "cmth-1", name: "Chana Metha", subtitle: "Traditional Chickpea", price: 95, weight: "200g" },
       { id: "cmth-2", name: "Chana Metha", subtitle: "Traditional Chickpea", price: 180, weight: "400g" },
+      { id: "cmth-3", name: "Chana Metha", subtitle: "Traditional Chickpea", price: 220, weight: "500g" },
+      { id: "cmth-4", name: "Chana Metha", subtitle: "Traditional Chickpea", price: 420, weight: "1kg" },
     ],
   },
 
@@ -143,6 +161,7 @@ export const products: Product[] = [
     variants: [
       { id: "mk-1", name: "Makka Keeche", subtitle: "Maize Variety", price: 100, weight: "250g" },
       { id: "mk-2", name: "Makka Keeche", subtitle: "Maize Variety", price: 190, weight: "500g" },
+      { id: "mk-3", name: "Makka Keeche", subtitle: "Maize Variety", price: 360, weight: "1kg" },
     ],
   },
   {
@@ -155,6 +174,7 @@ export const products: Product[] = [
     variants: [
       { id: "ck-1", name: "Chawal Keeche", subtitle: "Rice Variety", price: 100, weight: "250g" },
       { id: "ck-2", name: "Chawal Keeche", subtitle: "Rice Variety", price: 190, weight: "500g" },
+      { id: "ck-3", name: "Chawal Keeche", subtitle: "Rice Variety", price: 360, weight: "1kg" },
     ],
   },
   {
@@ -167,6 +187,7 @@ export const products: Product[] = [
     variants: [
       { id: "jk-1", name: "Jawar Keeche", subtitle: "Sorghum Variety", price: 110, weight: "250g" },
       { id: "jk-2", name: "Jawar Keeche", subtitle: "Sorghum Variety", price: 210, weight: "500g" },
+      { id: "jk-3", name: "Jawar Keeche", subtitle: "Sorghum Variety", price: 400, weight: "1kg" },
     ],
   },
   {
@@ -179,6 +200,7 @@ export const products: Product[] = [
     variants: [
       { id: "mdk-1", name: "Maida Keeche", subtitle: "Refined Flour", price: 95, weight: "250g" },
       { id: "mdk-2", name: "Maida Keeche", subtitle: "Refined Flour", price: 180, weight: "500g" },
+      { id: "mdk-3", name: "Maida Keeche", subtitle: "Refined Flour", price: 340, weight: "1kg" },
     ],
   },
 
@@ -194,6 +216,8 @@ export const products: Product[] = [
     variants: [
       { id: "mb-1", name: "Moong Badi", subtitle: "Green Gram Nuggets", price: 80, weight: "200g" },
       { id: "mb-2", name: "Moong Badi", subtitle: "Green Gram Nuggets", price: 150, weight: "400g" },
+      { id: "mb-3", name: "Moong Badi", subtitle: "Green Gram Nuggets", price: 190, weight: "500g" },
+      { id: "mb-4", name: "Moong Badi", subtitle: "Green Gram Nuggets", price: 360, weight: "1kg" },
     ],
   },
   {
@@ -206,6 +230,8 @@ export const products: Product[] = [
     variants: [
       { id: "ub-1", name: "Urad Badi", subtitle: "Black Gram Nuggets", price: 85, weight: "200g" },
       { id: "ub-2", name: "Urad Badi", subtitle: "Black Gram Nuggets", price: 160, weight: "400g" },
+      { id: "ub-3", name: "Urad Badi", subtitle: "Black Gram Nuggets", price: 200, weight: "500g" },
+      { id: "ub-4", name: "Urad Badi", subtitle: "Black Gram Nuggets", price: 380, weight: "1kg" },
     ],
   },
   {
@@ -218,6 +244,8 @@ export const products: Product[] = [
     variants: [
       { id: "cb-1", name: "Chawla Badi", subtitle: "Cowpea Nuggets", price: 85, weight: "200g" },
       { id: "cb-2", name: "Chawla Badi", subtitle: "Cowpea Nuggets", price: 160, weight: "400g" },
+      { id: "cb-3", name: "Chawla Badi", subtitle: "Cowpea Nuggets", price: 200, weight: "500g" },
+      { id: "cb-4", name: "Chawla Badi", subtitle: "Cowpea Nuggets", price: 380, weight: "1kg" },
     ],
   },
 
@@ -232,6 +260,7 @@ export const products: Product[] = [
     variants: [
       { id: "as-1", name: "Aata Sewaiya", subtitle: "Whole Wheat", price: 60, weight: "250g" },
       { id: "as-2", name: "Aata Sewaiya", subtitle: "Whole Wheat", price: 110, weight: "500g" },
+      { id: "as-3", name: "Aata Sewaiya", subtitle: "Whole Wheat", price: 200, weight: "1kg" },
     ],
   },
   {
@@ -244,6 +273,7 @@ export const products: Product[] = [
     variants: [
       { id: "msw-1", name: "Maida Sewaiya", subtitle: "Refined Flour", price: 55, weight: "250g" },
       { id: "msw-2", name: "Maida Sewaiya", subtitle: "Refined Flour", price: 100, weight: "500g" },
+      { id: "msw-3", name: "Maida Sewaiya", subtitle: "Refined Flour", price: 190, weight: "1kg" },
     ],
   },
   {
@@ -256,6 +286,7 @@ export const products: Product[] = [
     variants: [
       { id: "ss-1", name: "Suji Sewaiya", subtitle: "Semolina", price: 65, weight: "250g" },
       { id: "ss-2", name: "Suji Sewaiya", subtitle: "Semolina", price: 120, weight: "500g" },
+      { id: "ss-3", name: "Suji Sewaiya", subtitle: "Semolina", price: 230, weight: "1kg" },
     ],
   },
 
@@ -270,6 +301,8 @@ export const products: Product[] = [
     variants: [
       { id: "ckr-1", name: "Chawal Kurlai", subtitle: "Rice Fryums", price: 70, weight: "200g" },
       { id: "ckr-2", name: "Chawal Kurlai", subtitle: "Rice Fryums", price: 130, weight: "400g" },
+      { id: "ckr-3", name: "Chawal Kurlai", subtitle: "Rice Fryums", price: 160, weight: "500g" },
+      { id: "ckr-4", name: "Chawal Kurlai", subtitle: "Rice Fryums", price: 300, weight: "1kg" },
     ],
   },
   {
@@ -282,6 +315,8 @@ export const products: Product[] = [
     variants: [
       { id: "mkr-1", name: "Maida Kurlai", subtitle: "Maida Fryums", price: 65, weight: "200g" },
       { id: "mkr-2", name: "Maida Kurlai", subtitle: "Maida Fryums", price: 120, weight: "400g" },
+      { id: "mkr-3", name: "Maida Kurlai", subtitle: "Maida Fryums", price: 150, weight: "500g" },
+      { id: "mkr-4", name: "Maida Kurlai", subtitle: "Maida Fryums", price: 280, weight: "1kg" },
     ],
   },
   {
@@ -294,6 +329,8 @@ export const products: Product[] = [
     variants: [
       { id: "mkk-1", name: "Makka Kurlai", subtitle: "Maize Fryums", price: 75, weight: "200g" },
       { id: "mkk-2", name: "Makka Kurlai", subtitle: "Maize Fryums", price: 140, weight: "400g" },
+      { id: "mkk-3", name: "Makka Kurlai", subtitle: "Maize Fryums", price: 170, weight: "500g" },
+      { id: "mkk-4", name: "Makka Kurlai", subtitle: "Maize Fryums", price: 320, weight: "1kg" },
     ],
   },
 
@@ -309,6 +346,8 @@ export const products: Product[] = [
     variants: [
       { id: "ps-1", name: "Pumpkin Seeds", subtitle: "Raw & Natural", price: 150, weight: "100g" },
       { id: "ps-2", name: "Pumpkin Seeds", subtitle: "Raw & Natural", price: 280, weight: "200g" },
+      { id: "ps-3", name: "Pumpkin Seeds", subtitle: "Raw & Natural", price: 650, weight: "500g" },
+      { id: "ps-4", name: "Pumpkin Seeds", subtitle: "Raw & Natural", price: 1200, weight: "1kg" },
     ],
   },
   {
@@ -321,6 +360,8 @@ export const products: Product[] = [
     variants: [
       { id: "sf-1", name: "Sunflower Seeds", subtitle: "Premium Quality", price: 120, weight: "100g" },
       { id: "sf-2", name: "Sunflower Seeds", subtitle: "Premium Quality", price: 220, weight: "200g" },
+      { id: "sf-3", name: "Sunflower Seeds", subtitle: "Premium Quality", price: 500, weight: "500g" },
+      { id: "sf-4", name: "Sunflower Seeds", subtitle: "Premium Quality", price: 950, weight: "1kg" },
     ],
   },
   {
@@ -333,6 +374,8 @@ export const products: Product[] = [
     variants: [
       { id: "sb-1", name: "Sabja Seeds", subtitle: "Natural Cooler", price: 80, weight: "100g" },
       { id: "sb-2", name: "Sabja Seeds", subtitle: "Natural Cooler", price: 150, weight: "200g" },
+      { id: "sb-3", name: "Sabja Seeds", subtitle: "Natural Cooler", price: 350, weight: "500g" },
+      { id: "sb-4", name: "Sabja Seeds", subtitle: "Natural Cooler", price: 650, weight: "1kg" },
     ],
   },
   {
@@ -345,6 +388,8 @@ export const products: Product[] = [
     variants: [
       { id: "cs-1", name: "Chia Seeds", subtitle: "Superfood", price: 140, weight: "100g" },
       { id: "cs-2", name: "Chia Seeds", subtitle: "Superfood", price: 260, weight: "200g" },
+      { id: "cs-3", name: "Chia Seeds", subtitle: "Superfood", price: 600, weight: "500g" },
+      { id: "cs-4", name: "Chia Seeds", subtitle: "Superfood", price: 1100, weight: "1kg" },
     ],
   },
   {
@@ -357,6 +402,8 @@ export const products: Product[] = [
     variants: [
       { id: "ws-1", name: "Watermelon Kernels", subtitle: "Nutty Kernels", price: 110, weight: "100g" },
       { id: "ws-2", name: "Watermelon Kernels", subtitle: "Nutty Kernels", price: 200, weight: "200g" },
+      { id: "ws-3", name: "Watermelon Kernels", subtitle: "Nutty Kernels", price: 450, weight: "500g" },
+      { id: "ws-4", name: "Watermelon Kernels", subtitle: "Nutty Kernels", price: 850, weight: "1kg" },
     ],
   },
 ];
