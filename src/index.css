@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   :root {
@@ -46,7 +46,12 @@
     --brand-50: 60 40% 98%;
     --brand-100: 104 40% 92%;
     --brand-200: 104 40% 84%;
-    --brand-500: 124 23% 41%;
+    --brand-300: 104 35% 75%;
+    --brand-400: 104 30% 65%;
+    --brand-500: 124 23% 41%; /* Primary Green */
+    --brand-600: 124 25% 35%;
+    --brand-700: 124 28% 28%;
+    --brand-800: 124 30% 20%;
     --brand-900: 124 23% 15%;
 
     /* Shadows: Subtle & Organic */
@@ -79,7 +84,7 @@
   }
 
   .btn-outline {
-    @apply inline-flex items-center justify-center rounded-[var(--radius)] border border-border bg-white/10 backdrop-blur-sm px-6 py-3 text-sm font-semibold text-foreground transition-all duration-300 hover:bg-white/20 active:scale-[0.98];
+    @apply inline-flex items-center justify-center rounded-[var(--radius)] border-2 border-white/60 bg-white/10 backdrop-blur-md px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-white/20 hover:border-white active:scale-[0.98] shadow-lg;
   }
 
   /* Cards: Soft Off-White */

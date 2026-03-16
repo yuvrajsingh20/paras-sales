@@ -64,7 +64,7 @@ export const LandingPage = () => {
               Shop Retail
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-2 transition-transform" />
             </Link>
-            <Link to="/wholesale" className="btn-outline text-base px-10 py-4 group border-[#FAFAF5]/40 text-[#FAFAF5] hover:bg-white/20 backdrop-blur-md shadow-xl text-shadow-premium font-bold">
+            <Link to="/wholesale" className="btn-outline text-base px-10 py-4 group border-white/80 text-white hover:bg-white/20 backdrop-blur-lg shadow-2xl text-shadow-premium font-black">
               Wholesale Inquiry
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-2 transition-transform" />
             </Link>
