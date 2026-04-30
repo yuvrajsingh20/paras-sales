@@ -9,6 +9,7 @@ import { AuthProvider } from "@/context/AuthContext";
 import Index from "./pages/Index";
 import RetailPage from "./pages/Retail";
 import WholesalePage from "./pages/Wholesale";
+import CheckoutPage from "./pages/Checkout";
 import NotFound from "./pages/NotFound";
 
 import { GoogleOAuthProvider } from "@react-oauth/google";
@@ -28,24 +29,25 @@ const App = () => (
       <TooltipProvider>
         <AuthProvider>
           <CartProvider>
-          <WishlistProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/retail" element={<RetailPage />} />
-                <Route path="/wholesale" element={<WholesalePage />} />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </BrowserRouter>
-          </WishlistProvider>
-        </CartProvider>
-      </AuthProvider>
-    </TooltipProvider>
-  </GoogleOAuthProvider>
-</QueryClientProvider>
+            <WishlistProvider>
+              <Toaster />
+              <Sonner />
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/retail" element={<RetailPage />} />
+                  <Route path="/wholesale" element={<WholesalePage />} />
+                  <Route path="/checkout" element={<CheckoutPage />} />
+                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </BrowserRouter>
+            </WishlistProvider>
+          </CartProvider>
+        </AuthProvider>
+      </TooltipProvider>
+    </GoogleOAuthProvider>
+  </QueryClientProvider>
 );
 
 export default App;

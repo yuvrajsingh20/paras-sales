@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { X, ShoppingCart, Minus, Plus, Trash2 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
@@ -14,15 +15,15 @@ const imageMap: Record<string, string> = {
 export const CartDrawer = () => {
   const { items, removeFromCart, updateQuantity, total, isCartOpen, setIsCartOpen, clearCart } = useCart();
   const { user, setIsLoginOpen } = useAuth();
+  const navigate = useNavigate();
 
   const handleCheckout = () => {
     if (!user) {
       setIsCartOpen(false);
       setIsLoginOpen(true);
     } else {
-      alert("Order placed successfully! Thank you for shopping with Paras-Ji 🌿");
-      clearCart();
       setIsCartOpen(false);
+      navigate("/checkout");
     }
   };
 

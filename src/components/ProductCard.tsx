@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Heart, ShoppingCart } from "lucide-react";
 import { Product } from "@/data/products";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
+import { useAuth } from "@/context/AuthContext";
+import { toast } from "sonner";
 import productPapad from "@/assets/product-papad.jpg";
 import productSevaiyan from "@/assets/product-sevaiyan.jpg";
 import productPapadi from "@/assets/product-papadi.jpg";
@@ -26,6 +29,8 @@ export const ProductCard = ({ product, onClick }: ProductCardProps) => {
   const [selectedVariant, setSelectedVariant] = useState(product.variants[0]);
   const { addToCart } = useCart();
   const { toggleWishlist, isWishlisted } = useWishlist();
+  const { user, setIsLoginOpen } = useAuth();
+  const navigate = useNavigate();
   const wishlisted = isWishlisted(product.id);
 
   const handleAddToCart = () => {
@@ -38,6 +43,25 @@ export const ProductCard = ({ product, onClick }: ProductCardProps) => {
       weight: selectedVariant.weight,
       image: product.category,
     });
+    toast.success(`${product.name} added to cart`);
+  };
+
+  const handleBuyNow = () => {
+    if (!user) {
+      setIsLoginOpen(true);
+      return;
+    }
+
+    addToCart({
+      productId: product.id,
+      variantId: selectedVariant.id,
+      name: product.name,
+      variantName: selectedVariant.name,
+      price: selectedVariant.price,
+      weight: selectedVariant.weight,
+      image: product.category,
+    });
+    navigate("/checkout");
   };
 
   return (
@@ -129,16 +153,27 @@ export const ProductCard = ({ product, onClick }: ProductCardProps) => {
               </span>
             </div>
             
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                handleAddToCart();
-              }}
-              className="btn-primary p-2.5 rounded-full hover:shadow-lg transition-all active:scale-95"
-              aria-label="Add to Cart"
-            >
-              <ShoppingCart className="h-4 w-4" />
-            </button>
+            <div className="flex gap-2">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleBuyNow();
+                }}
+                className="bg-primary text-white text-[10px] font-bold px-4 py-2 rounded-full hover:bg-primary/90 transition-all active:scale-95 shadow-sm"
+              >
+                BUY NOW
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleAddToCart();
+                }}
+                className="bg-secondary text-foreground p-2.5 rounded-full hover:shadow-lg transition-all active:scale-95 border border-border/50"
+                aria-label="Add to Cart"
+              >
+                <ShoppingCart className="h-4 w-4" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
