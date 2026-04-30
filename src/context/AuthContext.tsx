@@ -7,6 +7,7 @@ interface User {
   email: string;
   phone_number?: string;
   auth_provider: string;
+  created_at?: string;
 }
 
 interface AuthContextType {
@@ -18,6 +19,7 @@ interface AuthContextType {
   sendOtp: (phoneNumber: string) => Promise<boolean>;
   verifyOtp: (phoneNumber: string, otp: string) => Promise<boolean>;
   logout: () => void;
+  updateProfile: (data: { name?: string; phone_number?: string }) => Promise<boolean>;
   isLoginOpen: boolean;
   setIsLoginOpen: (open: boolean) => void;
 }
@@ -166,6 +168,28 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     toast.success("Logged out");
   };
 
+  const updateProfile = async (data: { name?: string; phone_number?: string }): Promise<boolean> => {
+    try {
+      const res = await fetch("/api/user/profile", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const json = await res.json();
+      if (res.ok) {
+        setUser(json.user);
+        toast.success("Profile updated!");
+        return true;
+      } else {
+        toast.error(json.error || "Update failed");
+        return false;
+      }
+    } catch {
+      toast.error("Something went wrong");
+      return false;
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -177,6 +201,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         sendOtp,
         verifyOtp,
         logout,
+        updateProfile,
         isLoginOpen,
         setIsLoginOpen,
       }}
