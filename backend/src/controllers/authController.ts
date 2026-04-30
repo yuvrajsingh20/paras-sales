@@ -127,12 +127,16 @@ export const signup = async (req: Request, res: Response) => {
   if (!password || password.length < 6) return res.status(400).json({ error: 'Password must be at least 6 characters' });
 
   try {
+    const normalizedEmail = email.toLowerCase().trim();
+    console.log('[Signup] Attempt for:', normalizedEmail);
+    
     const hashedPassword = await bcrypt.hash(password, 10);
     const result = await pool.query(
       'INSERT INTO users (name, email, phone_number, hashed_password, auth_provider) VALUES ($1, $2, $3, $4, $5) RETURNING id, name, email, auth_provider',
-      [name, email, phone_number, hashedPassword, 'email']
+      [name, normalizedEmail, phone_number, hashedPassword, 'email']
     );
     const user = result.rows[0];
+    console.log('[Signup] User created:', user.id);
 
     const token = generateToken(user.id);
     res.cookie('token', token, { 
@@ -151,10 +155,33 @@ export const signup = async (req: Request, res: Response) => {
 export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
   try {
-    const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+    const normalizedEmail = email?.toLowerCase().trim();
+    console.log('[Login] Attempt for:', normalizedEmail);
+    
+    const result = await pool.query('SELECT * FROM users WHERE email = $1', [normalizedEmail]);
     const user = result.rows[0];
 
-    if (!user || !user.hashed_password || !(await bcrypt.compare(password, user.hashed_password))) {
+    if (!user) {
+      console.log('[Login] User not found for email:', normalizedEmail);
+      return res.status(400).json({ error: 'Invalid email or password' });
+    }
+
+    console.log('[Login] User found:', user.email, '| Provider:', user.auth_provider);
+    
+    if (!user.hashed_password) {
+      console.log('[Login] No hashed_password for user:', user.email);
+      return res.status(400).json({ error: 'Invalid email or password' });
+    }
+
+    console.log('[Login] Provided password length:', password?.length);
+    console.log('[Login] Stored hash length:', user.hashed_password.length);
+    console.log('[Login] Stored hash start:', user.hashed_password.substring(0, 7));
+
+    const isMatch = await bcrypt.compare(password, user.hashed_password);
+    console.log('[Login] bcrypt.compare result:', isMatch);
+
+    if (!isMatch) {
+      console.log('[Login] Password mismatch');
       return res.status(400).json({ error: 'Invalid email or password' });
     }
 

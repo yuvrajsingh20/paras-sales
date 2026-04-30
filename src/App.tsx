@@ -19,6 +19,7 @@ const queryClient = new QueryClient();
 const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 const isGoogleConfigured = googleClientId && googleClientId !== 'your-google-client-id';
 
+console.log('[Frontend] Google Client ID:', googleClientId);
 if (!isGoogleConfigured) {
   console.warn('Google Login is not configured. Please set VITE_GOOGLE_CLIENT_ID in your .env file.');
 }

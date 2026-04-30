@@ -123,6 +123,16 @@ export const products: Product[] = [
       { id: "msi-3", name: "Moong Sindhi", subtitle: "Sindhi Special", price: 280, weight: "500g" },
       { id: "msi-4", name: "Moong Sindhi", subtitle: "Sindhi Special", price: 540, weight: "1kg" },
     ],
+    nutrition: {
+      calories: "330-370 Kcal",
+      protein: "23-26g",
+      carbs: "55-60g",
+      fat: "0.5-1.5g",
+      fiber: "8-10g",
+      sodium: "900-1300mg",
+      calcium: "40-70mg",
+      iron: "3-5mg"
+    },
     ingredients: ["Moong Dal", "Sindhi Spice Blend", "Salt", "Black Pepper", "Asafoetida (Hing)", "Cumin Seeds (Jeera)", "Baking Soda / Papad Khar", "Edible Oil", "Water"]
   },
   {
@@ -138,6 +148,16 @@ export const products: Product[] = [
       { id: "mu-3", name: "Moong Urad", subtitle: "Mixed Dal", price: 280, weight: "500g" },
       { id: "mu-4", name: "Moong Urad", subtitle: "Mixed Dal", price: 540, weight: "1kg" },
     ],
+    nutrition: {
+      calories: "330-370 Kcal",
+      protein: "23-26g",
+      carbs: "55-60g",
+      fat: "0.5-1.5g",
+      fiber: "8-10g",
+      sodium: "900-1300mg",
+      calcium: "40-70mg",
+      iron: "3-5mg"
+    },
     ingredients: ["Moong Dal", "Urad Dal", "Salt", "Black Pepper", "Asafoetida (Hing)", "Cumin Seeds (Jeera)", "Baking Soda / Papad Khar", "Edible Oil", "Water"]
   },
 
@@ -207,6 +227,16 @@ export const products: Product[] = [
       { id: "cmt-3", name: "Chana Methi", subtitle: "Fenugreek Chickpea", price: 310, weight: "500g" },
       { id: "cmt-4", name: "Chana Methi", subtitle: "Fenugreek Chickpea", price: 600, weight: "1kg" },
     ],
+    nutrition: {
+      calories: "360-400 Kcal",
+      protein: "18-22g",
+      carbs: "55-60g",
+      fat: "2-5g",
+      fiber: "10-12g",
+      sodium: "900-1400mg",
+      calcium: "40-70mg",
+      iron: "4-6mg"
+    },
     ingredients: ["Chana Dal Flour (Besan)", "Dried Fenugreek Leaves (Methi)", "Salt", "Red Chilli Powder", "Black Pepper", "Cumin Seeds (Jeera)", "Asafoetida (Hing)", "Papad Khar / Baking Soda", "Edible Oil", "Water"]
   },
   {
@@ -217,11 +247,22 @@ export const products: Product[] = [
     image: "/placeholder.svg",
     category: "chana-papad",
     variants: [
-      { id: "cmth-1", name: "Chana Metha", subtitle: "Traditional Chickpea", price: 95, weight: "200g" },
-      { id: "cmth-2", name: "Chana Metha", subtitle: "Traditional Chickpea", price: 180, weight: "400g" },
-      { id: "cmth-3", name: "Chana Metha", subtitle: "Traditional Chickpea", price: 220, weight: "500g" },
-      { id: "cmth-4", name: "Chana Metha", subtitle: "Traditional Chickpea", price: 420, weight: "1kg" },
+      { id: "cmth-1", name: "Chana Metha", subtitle: "Traditional Chickpea", price: 120, weight: "200g" },
+      { id: "cmth-2", name: "Chana Metha", subtitle: "Traditional Chickpea", price: 230, weight: "400g" },
+      { id: "cmth-3", name: "Chana Metha", subtitle: "Traditional Chickpea", price: 280, weight: "500g" },
+      { id: "cmth-4", name: "Chana Metha", subtitle: "Traditional Chickpea", price: 540, weight: "1kg" },
     ],
+    nutrition: {
+      calories: "360-400 Kcal",
+      protein: "18-22g",
+      carbs: "55-60g",
+      fat: "2-5g",
+      fiber: "10-12g",
+      sodium: "900-1400mg",
+      calcium: "40-70mg",
+      iron: "4-6mg"
+    },
+    ingredients: ["Chana Dal Flour (Besan)", "Special Traditional Spices", "Salt", "Red Chilli Powder", "Black Pepper", "Cumin Seeds (Jeera)", "Asafoetida (Hing)", "Papad Khar / Baking Soda", "Edible Oil", "Water"]
   },
 
   // KEECHE PAPAD
@@ -261,6 +302,16 @@ export const products: Product[] = [
       { id: "ck-2", name: "Chawal Keeche", subtitle: "Rice Variety", price: 230, weight: "500g" },
       { id: "ck-3", name: "Chawal Keeche", subtitle: "Rice Variety", price: 430, weight: "1kg" },
     ],
+    nutrition: {
+      calories: "350 Kcal",
+      protein: "7g",
+      carbs: "78g",
+      fat: "0.5g",
+      fiber: "2g",
+      sodium: "850mg",
+      calcium: "15mg",
+      iron: "1.5mg"
+    },
     ingredients: ["Rice Flour (Chawal Aata)", "Salt", "Papad Khar", "Water", "Traditional Spices"]
   },
   {
@@ -275,6 +326,17 @@ export const products: Product[] = [
       { id: "jk-2", name: "Jawar Keeche", subtitle: "Sorghum Variety", price: 250, weight: "500g" },
       { id: "jk-3", name: "Jawar Keeche", subtitle: "Sorghum Variety", price: 480, weight: "1kg" },
     ],
+    nutrition: {
+      calories: "360 Kcal",
+      protein: "11g",
+      carbs: "72g",
+      fat: "3g",
+      fiber: "6g",
+      sodium: "900mg",
+      calcium: "25mg",
+      iron: "4mg"
+    },
+    ingredients: ["Sorghum Flour (Jawar Aata)", "Salt", "Papad Khar", "Water", "Traditional Spices"]
   },
   {
     id: "maida-keeche",
@@ -284,10 +346,21 @@ export const products: Product[] = [
     image: "/placeholder.svg",
     category: "keeche-papad",
     variants: [
-      { id: "mdk-1", name: "Maida Keeche", subtitle: "Refined Flour", price: 95, weight: "250g" },
-      { id: "mdk-2", name: "Maida Keeche", subtitle: "Refined Flour", price: 180, weight: "500g" },
-      { id: "mdk-3", name: "Maida Keeche", subtitle: "Refined Flour", price: 340, weight: "1kg" },
+      { id: "mdk-1", name: "Maida Keeche", subtitle: "Refined Flour", price: 114, weight: "250g" },
+      { id: "mdk-2", name: "Maida Keeche", subtitle: "Refined Flour", price: 216, weight: "500g" },
+      { id: "mdk-3", name: "Maida Keeche", subtitle: "Refined Flour", price: 408, weight: "1kg" },
     ],
+    nutrition: {
+      calories: "355 Kcal",
+      protein: "10g",
+      carbs: "74g",
+      fat: "1g",
+      fiber: "3g",
+      sodium: "880mg",
+      calcium: "20mg",
+      iron: "2mg"
+    },
+    ingredients: ["Refined Flour (Maida)", "Salt", "Papad Khar", "Water", "Traditional Spices"]
   },
 
   // BADI
@@ -325,11 +398,21 @@ export const products: Product[] = [
     image: "/placeholder.svg",
     category: "badi",
     variants: [
-      { id: "ub-1", name: "Urad Badi", subtitle: "Black Gram Nuggets", price: 100, weight: "200g" },
-      { id: "ub-2", name: "Urad Badi", subtitle: "Black Gram Nuggets", price: 190, weight: "400g" },
-      { id: "ub-3", name: "Urad Badi", subtitle: "Black Gram Nuggets", price: 240, weight: "500g" },
-      { id: "ub-4", name: "Urad Badi", subtitle: "Black Gram Nuggets", price: 460, weight: "1kg" },
+      { id: "ub-1", name: "Urad Badi", subtitle: "Black Gram Nuggets", price: 120, weight: "200g" },
+      { id: "ub-2", name: "Urad Badi", subtitle: "Black Gram Nuggets", price: 230, weight: "400g" },
+      { id: "ub-3", name: "Urad Badi", subtitle: "Black Gram Nuggets", price: 280, weight: "500g" },
+      { id: "ub-4", name: "Urad Badi", subtitle: "Black Gram Nuggets", price: 540, weight: "1kg" },
     ],
+    nutrition: {
+      calories: "350 Kcal",
+      protein: "24g",
+      carbs: "58g",
+      fat: "1.5g",
+      fiber: "15g",
+      sodium: "30mg",
+      calcium: "130mg",
+      iron: "7mg"
+    },
     ingredients: ["Urad Dal", "Ginger", "Green Chilli", "Salt", "Traditional Spice Blend", "Water"]
   },
   {
@@ -340,11 +423,22 @@ export const products: Product[] = [
     image: "/placeholder.svg",
     category: "badi",
     variants: [
-      { id: "cb-1", name: "Chawla Badi", subtitle: "Cowpea Nuggets", price: 100, weight: "200g" },
-      { id: "cb-2", name: "Chawla Badi", subtitle: "Cowpea Nuggets", price: 190, weight: "400g" },
-      { id: "cb-3", name: "Chawla Badi", subtitle: "Cowpea Nuggets", price: 240, weight: "500g" },
-      { id: "cb-4", name: "Chawla Badi", subtitle: "Cowpea Nuggets", price: 460, weight: "1kg" },
+      { id: "cb-1", name: "Chawla Badi", subtitle: "Cowpea Nuggets", price: 120, weight: "200g" },
+      { id: "cb-2", name: "Chawla Badi", subtitle: "Cowpea Nuggets", price: 230, weight: "400g" },
+      { id: "cb-3", name: "Chawla Badi", subtitle: "Cowpea Nuggets", price: 280, weight: "500g" },
+      { id: "cb-4", name: "Chawla Badi", subtitle: "Cowpea Nuggets", price: 540, weight: "1kg" },
     ],
+    nutrition: {
+      calories: "345 Kcal",
+      protein: "23g",
+      carbs: "60g",
+      fat: "1g",
+      fiber: "10g",
+      sodium: "25mg",
+      calcium: "110mg",
+      iron: "8mg"
+    },
+    ingredients: ["Cowpea (Chawla Dal)", "Ginger", "Green Chilli", "Salt", "Traditional Spices", "Water"]
   },
 
   // SEWAIYA
@@ -384,6 +478,17 @@ export const products: Product[] = [
       { id: "msw-2", name: "Maida Sewaiya", subtitle: "Refined Flour", price: 120, weight: "500g" },
       { id: "msw-3", name: "Maida Sewaiya", subtitle: "Refined Flour", price: 228, weight: "1kg" },
     ],
+    nutrition: {
+      calories: "355 Kcal",
+      protein: "9g",
+      carbs: "76g",
+      fat: "0.8g",
+      fiber: "2g",
+      sodium: "15mg",
+      calcium: "15mg",
+      iron: "1.5mg"
+    },
+    ingredients: ["Refined Flour (Maida)", "Water", "Salt"]
   },
   {
     id: "suji-sewaiya",
@@ -397,6 +502,17 @@ export const products: Product[] = [
       { id: "ss-2", name: "Suji Sewaiya", subtitle: "Semolina", price: 144, weight: "500g" },
       { id: "ss-3", name: "Suji Sewaiya", subtitle: "Semolina", price: 276, weight: "1kg" },
     ],
+    nutrition: {
+      calories: "360 Kcal",
+      protein: "12g",
+      carbs: "72g",
+      fat: "1.2g",
+      fiber: "3.5g",
+      sodium: "12mg",
+      calcium: "22mg",
+      iron: "2.5mg"
+    },
+    ingredients: ["Semolina (Suji)", "Water", "Salt"]
   },
 
   // KURLAI
@@ -413,6 +529,17 @@ export const products: Product[] = [
       { id: "ckr-3", name: "Chawal Kurlai", subtitle: "Rice Fryums", price: 192, weight: "500g" },
       { id: "ckr-4", name: "Chawal Kurlai", subtitle: "Rice Fryums", price: 360, weight: "1kg" },
     ],
+    nutrition: {
+      calories: "360 Kcal",
+      protein: "7g",
+      carbs: "80g",
+      fat: "0.5g",
+      fiber: "1g",
+      sodium: "950mg",
+      calcium: "10mg",
+      iron: "1mg"
+    },
+    ingredients: ["Rice Flour", "Salt", "Papad Khar", "Edible Oil", "Water"]
   },
   {
     id: "maida-kurlai",
@@ -427,6 +554,17 @@ export const products: Product[] = [
       { id: "mkr-3", name: "Maida Kurlai", subtitle: "Maida Fryums", price: 180, weight: "500g" },
       { id: "mkr-4", name: "Maida Kurlai", subtitle: "Maida Fryums", price: 336, weight: "1kg" },
     ],
+    nutrition: {
+      calories: "370 Kcal",
+      protein: "9g",
+      carbs: "78g",
+      fat: "1g",
+      fiber: "2g",
+      sodium: "900mg",
+      calcium: "12mg",
+      iron: "1.2mg"
+    },
+    ingredients: ["Refined Flour (Maida)", "Salt", "Papad Khar", "Edible Oil", "Water"]
   },
   {
     id: "makka-kurlai",
@@ -441,6 +579,17 @@ export const products: Product[] = [
       { id: "mkk-3", name: "Makka Kurlai", subtitle: "Maize Fryums", price: 170, weight: "500g" },
       { id: "mkk-4", name: "Makka Kurlai", subtitle: "Maize Fryums", price: 320, weight: "1kg" },
     ],
+    nutrition: {
+      calories: "365 Kcal",
+      protein: "8g",
+      carbs: "75g",
+      fat: "2g",
+      fiber: "5g",
+      sodium: "880mg",
+      calcium: "15mg",
+      iron: "2.5mg"
+    },
+    ingredients: ["Maize Flour", "Salt", "Papad Khar", "Edible Oil", "Water"]
   },
 
   // SEEDS
@@ -483,6 +632,17 @@ export const products: Product[] = [
       { id: "sf-3", name: "Sunflower Seeds", subtitle: "Premium Quality", price: 500, weight: "500g" },
       { id: "sf-4", name: "Sunflower Seeds", subtitle: "Premium Quality", price: 950, weight: "1kg" },
     ],
+    nutrition: {
+      calories: "580 Kcal",
+      protein: "21g",
+      carbs: "20g",
+      fat: "51g",
+      fiber: "9g",
+      sodium: "9mg",
+      calcium: "78mg",
+      iron: "5.3mg"
+    },
+    ingredients: ["100% Raw Sunflower Seeds"]
   },
   {
     id: "sabja-seeds",
@@ -497,6 +657,17 @@ export const products: Product[] = [
       { id: "sb-3", name: "Sabja Seeds", subtitle: "Natural Cooler", price: 350, weight: "500g" },
       { id: "sb-4", name: "Sabja Seeds", subtitle: "Natural Cooler", price: 650, weight: "1kg" },
     ],
+    nutrition: {
+      calories: "230 Kcal",
+      protein: "15g",
+      carbs: "42g",
+      fat: "14g",
+      fiber: "38g",
+      sodium: "0mg",
+      calcium: "250mg",
+      iron: "2mg"
+    },
+    ingredients: ["100% Natural Sweet Basil Seeds"]
   },
   {
     id: "chia-seeds",
@@ -511,6 +682,17 @@ export const products: Product[] = [
       { id: "cs-3", name: "Chia Seeds", subtitle: "Superfood", price: 600, weight: "500g" },
       { id: "cs-4", name: "Chia Seeds", subtitle: "Superfood", price: 1100, weight: "1kg" },
     ],
+    nutrition: {
+      calories: "486 Kcal",
+      protein: "17g",
+      carbs: "42g",
+      fat: "31g",
+      fiber: "34g",
+      sodium: "16mg",
+      calcium: "630mg",
+      iron: "7.7mg"
+    },
+    ingredients: ["100% Organic Chia Seeds"]
   },
   {
     id: "watermelon-seeds",
@@ -525,6 +707,17 @@ export const products: Product[] = [
       { id: "ws-3", name: "Watermelon Kernels", subtitle: "Nutty Kernels", price: 450, weight: "500g" },
       { id: "ws-4", name: "Watermelon Kernels", subtitle: "Nutty Kernels", price: 850, weight: "1kg" },
     ],
+    nutrition: {
+      calories: "557 Kcal",
+      protein: "28g",
+      carbs: "15g",
+      fat: "47g",
+      fiber: "7g",
+      sodium: "100mg",
+      calcium: "54mg",
+      iron: "7.3mg"
+    },
+    ingredients: ["100% Natural Watermelon Seed Kernels"]
   },
 ];
 

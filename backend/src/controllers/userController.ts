@@ -4,7 +4,7 @@ import { pool } from '../config/db';
 export const getProfile = async (req: any, res: Response) => {
   try {
     const result = await pool.query(
-      'SELECT id, name, email, phone_number, auth_provider, created_at FROM users WHERE id = $1',
+      'SELECT id, name, email, phone_number, auth_provider, address, city, state, pincode, created_at FROM users WHERE id = $1',
       [req.userId]
     );
     const user = result.rows[0];
@@ -47,6 +47,23 @@ export const updateProfile = async (req: any, res: Response) => {
       values.push(cleaned || null);
     }
 
+    if (req.body.address !== undefined) {
+      fields.push(`address = $${idx++}`);
+      values.push(req.body.address);
+    }
+    if (req.body.city !== undefined) {
+      fields.push(`city = $${idx++}`);
+      values.push(req.body.city);
+    }
+    if (req.body.state !== undefined) {
+      fields.push(`state = $${idx++}`);
+      values.push(req.body.state);
+    }
+    if (req.body.pincode !== undefined) {
+      fields.push(`pincode = $${idx++}`);
+      values.push(req.body.pincode);
+    }
+
     if (fields.length === 0) {
       return res.status(400).json({ error: 'Nothing to update' });
     }
@@ -57,7 +74,7 @@ export const updateProfile = async (req: any, res: Response) => {
       UPDATE users
       SET ${fields.join(', ')}
       WHERE id = $${idx}
-      RETURNING id, name, email, phone_number, auth_provider, created_at
+      RETURNING id, name, email, phone_number, auth_provider, address, city, state, pincode, created_at
     `;
 
     console.log('[updateProfile] SQL:', sql, 'Values:', values);

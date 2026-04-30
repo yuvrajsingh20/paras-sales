@@ -6,6 +6,10 @@ interface User {
   name: string;
   email: string;
   phone_number?: string;
+  address?: string;
+  city?: string;
+  state?: string;
+  pincode?: string;
   auth_provider: string;
   created_at?: string;
 }
@@ -19,7 +23,14 @@ interface AuthContextType {
   sendOtp: (phoneNumber: string) => Promise<boolean>;
   verifyOtp: (phoneNumber: string, otp: string) => Promise<boolean>;
   logout: () => void;
-  updateProfile: (data: { name?: string; phone_number?: string }) => Promise<boolean>;
+  updateProfile: (data: { 
+    name?: string; 
+    phone_number?: string;
+    address?: string;
+    city?: string;
+    state?: string;
+    pincode?: string;
+  }) => Promise<boolean>;
   isLoginOpen: boolean;
   setIsLoginOpen: (open: boolean) => void;
 }
@@ -51,22 +62,28 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
+      console.log('[AuthContext] Logging in...', email);
       const res = await fetch("/api/auth/email/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
+      
+      console.log('[AuthContext] Login response status:', res.status);
       const data = await res.json();
+      
       if (res.ok) {
         setUser(data.user);
         setIsLoginOpen(false);
         toast.success("Welcome back!");
         return true;
       } else {
+        console.error('[AuthContext] Login error:', data.error);
         toast.error(data.error || "Login failed");
         return false;
       }
     } catch (err) {
+      console.error('[AuthContext] Login exception:', err);
       toast.error("Something went wrong");
       return false;
     }
@@ -74,22 +91,30 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const signup = async (name: string, email: string, password: string, phone?: string): Promise<boolean> => {
     try {
+      console.log('[AuthContext] Signing up...', email);
       const res = await fetch("/api/auth/email/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password, phone_number: phone }),
       });
+      
+      console.log('[AuthContext] Signup response status:', res.status);
       const data = await res.json();
+      
       if (res.ok) {
+        console.log('[AuthContext] Signup success, user:', data.user.id);
         setUser(data.user);
-        setIsLoginOpen(false);
         toast.success("Account created successfully!");
+        // Small delay to ensure toast is visible before modal closes
+        setTimeout(() => setIsLoginOpen(false), 500);
         return true;
       } else {
+        console.error('[AuthContext] Signup error:', data.error);
         toast.error(data.error || "Signup failed");
         return false;
       }
     } catch (err) {
+      console.error('[AuthContext] Signup exception:', err);
       toast.error("Something went wrong");
       return false;
     }
@@ -97,6 +122,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const googleLogin = async (credential: string): Promise<boolean> => {
     try {
+      console.log('[AuthContext] Google Login...');
       const res = await fetch("/api/auth/google", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -109,10 +135,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         toast.success("Logged in with Google!");
         return true;
       } else {
+        console.error('[AuthContext] Google Login error:', data.error);
         toast.error(data.error || "Google login failed");
         return false;
       }
     } catch (err) {
+      console.error('[AuthContext] Google Login exception:', err);
       toast.error("Something went wrong");
       return false;
     }
@@ -163,12 +191,23 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const logout = async () => {
-    await fetch("/api/auth/logout", { method: "POST" });
-    setUser(null);
-    toast.success("Logged out");
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+      setUser(null);
+      toast.success("Logged out");
+    } catch (err) {
+      console.error("Logout failed", err);
+    }
   };
 
-  const updateProfile = async (data: { name?: string; phone_number?: string }): Promise<boolean> => {
+  const updateProfile = async (data: { 
+    name?: string; 
+    phone_number?: string;
+    address?: string;
+    city?: string;
+    state?: string;
+    pincode?: string;
+  }): Promise<boolean> => {
     try {
       const res = await fetch("/api/user/profile", {
         method: "PUT",

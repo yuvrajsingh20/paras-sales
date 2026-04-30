@@ -18,10 +18,10 @@ const CheckoutPage = () => {
   const [formData, setFormData] = useState({
     name: user?.name || "",
     phone: user?.phone_number || "",
-    address: "",
-    city: "",
-    state: "",
-    pincode: "",
+    address: user?.address || "",
+    city: user?.city || "",
+    state: user?.state || "",
+    pincode: user?.pincode || "",
   });
 
   useEffect(() => {
@@ -45,9 +45,17 @@ const CheckoutPage = () => {
 
     setLoading(true);
     try {
-      // Update profile with phone if not already set
-      if (!user?.phone_number && formData.phone) {
-        await updateProfile({ phone_number: formData.phone });
+      // Update profile with missing details if they are new
+      const profileUpdates: any = {};
+      if (formData.name !== user?.name) profileUpdates.name = formData.name;
+      if (formData.phone !== user?.phone_number) profileUpdates.phone_number = formData.phone;
+      if (formData.address !== user?.address) profileUpdates.address = formData.address;
+      if (formData.city !== user?.city) profileUpdates.city = formData.city;
+      if (formData.state !== user?.state) profileUpdates.state = formData.state;
+      if (formData.pincode !== user?.pincode) profileUpdates.pincode = formData.pincode;
+
+      if (Object.keys(profileUpdates).length > 0) {
+        await updateProfile(profileUpdates);
       }
 
       const order = await createRazorpayOrder(total);
