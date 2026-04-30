@@ -1,23 +1,19 @@
-import heroBg from "@/assets/hero-bg.jpg";
 import parasJiLogo from "@/assets/paras-ji-logo.png";
 import { Link } from "react-router-dom";
 import { ArrowRight, Leaf, Shield, Award } from "lucide-react";
+import { Navbar } from "@/components/Navbar";
+import { CartDrawer } from "@/components/CartDrawer";
+import { WishlistDrawer } from "@/components/WishlistDrawer";
+import { LoginModal } from "@/components/LoginModal";
+import { Footer } from "@/components/Footer";
 
 export const LandingPage = () => {
   return (
     <div className="min-h-screen bg-background flex flex-col text-foreground transition-page">
-      {/* Navbar Overlay */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 md:px-16 py-6 bg-background/80 backdrop-blur-xl border-b border-border/50">
-        <div className="flex items-center gap-3">
-          <img src={parasJiLogo} alt="Paras-Ji" className="h-10 w-10 object-contain" />
-          <span className="font-bold text-xl tracking-tight text-primary">Paras-Ji</span>
-        </div>
-        <div className="flex items-center gap-8">
-          <Link to="/retail" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Products</Link>
-          <a href="#about" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Our Story</a>
-          <Link to="/wholesale" className="btn-primary py-2 px-5 text-xs">Wholesale</Link>
-        </div>
-      </nav>
+      <Navbar />
+      <CartDrawer />
+      <WishlistDrawer />
+      <LoginModal />
 
       {/* Hero Section */}
       <section className="relative min-h-[95vh] flex items-center justify-center pt-32 pb-20 px-6 overflow-hidden">
@@ -113,28 +109,7 @@ export const LandingPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-background border-t border-border py-16 px-8 mt-auto">
-        <div className="container mx-auto max-w-7xl">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8 border-b border-border pb-12 mb-12">
-            <div className="flex items-center gap-3">
-              <img src={parasJiLogo} alt="Paras-Ji" className="h-10 w-10 object-contain" />
-              <span className="font-bold text-2xl tracking-tighter text-primary">Paras-Ji</span>
-            </div>
-            <div className="flex gap-10">
-              <Link to="/retail" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Shop</Link>
-              <Link to="/wholesale" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Wholesale</Link>
-              <a href="#" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Contact</a>
-            </div>
-          </div>
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-muted-foreground text-xs font-medium">
-            <p>© 2024 Paras-Ji Foods. Crafted with tradition.</p>
-            <div className="flex gap-6">
-              <span className="hover:text-foreground cursor-pointer transition-colors">Privacy Policy</span>
-              <span className="hover:text-foreground cursor-pointer transition-colors">Terms of Service</span>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
