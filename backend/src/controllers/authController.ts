@@ -1,12 +1,10 @@
 import { Request, Response } from 'express';
 import { OAuth2Client } from 'google-auth-library';
-import twilio from 'twilio';
 import bcrypt from 'bcryptjs';
 import { pool } from '../config/db';
-import { generateToken, validateEmail, validatePhone } from '../utils/helpers';
+import { generateToken, validateEmail } from '../utils/helpers';
 
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
-const otpStore = new Map<string, { otp: string, expires: number }>();
 
 export const googleAuth = async (req: Request, res: Response) => {
   const { credential } = req.body;
@@ -47,77 +45,6 @@ export const googleAuth = async (req: Request, res: Response) => {
     res.json({ user });
   } catch (error) {
     res.status(400).json({ error: 'Google authentication failed' });
-  }
-};
-
-export const sendOtp = async (req: Request, res: Response) => {
-  const { phoneNumber } = req.body;
-  if (!phoneNumber || !validatePhone(phoneNumber)) {
-    return res.status(400).json({ error: 'Valid phone number required (+91...)' });
-  }
-
-  const otp = Math.floor(100000 + Math.random() * 900000).toString();
-  otpStore.set(phoneNumber, { otp, expires: Date.now() + 5 * 60 * 1000 });
-
-  console.log(`[TESTING] OTP for ${phoneNumber}: ${otp}`);
-
-  let sentViaSms = false;
-
-  if (process.env.TWILIO_ACCOUNT_SID && 
-      process.env.TWILIO_ACCOUNT_SID !== 'your-twilio-sid' && 
-      process.env.TWILIO_AUTH_TOKEN) {
-    try {
-      const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
-      await client.messages.create({
-        body: `Your verification code is: ${otp}`,
-        from: process.env.TWILIO_PHONE_NUMBER,
-        to: phoneNumber,
-      });
-      sentViaSms = true;
-    } catch (err) {
-      console.error('Twilio Error:', err);
-    }
-  }
-
-  res.json({ 
-    message: sentViaSms 
-      ? 'OTP sent successfully' 
-      : 'OTP generated (Check backend terminal for code in Dev Mode)' 
-  });
-};
-
-export const verifyOtp = async (req: Request, res: Response) => {
-  const { phoneNumber, otp } = req.body;
-  const stored = otpStore.get(phoneNumber);
-
-  if (!stored || stored.otp !== otp || stored.expires < Date.now()) {
-    return res.status(400).json({ error: 'Invalid or expired OTP' });
-  }
-
-  otpStore.delete(phoneNumber);
-
-  try {
-    let result = await pool.query('SELECT * FROM users WHERE phone_number = $1', [phoneNumber]);
-    let user = result.rows[0];
-
-    if (!user) {
-      result = await pool.query(
-        'INSERT INTO users (phone_number, auth_provider) VALUES ($1, $2) RETURNING *',
-        [phoneNumber, 'phone']
-      );
-      user = result.rows[0];
-    }
-
-    const token = generateToken(user.id);
-    res.cookie('token', token, { 
-      httpOnly: true, 
-      secure: process.env.NODE_ENV === 'production', 
-      sameSite: 'lax',
-      maxAge: 7 * 24 * 60 * 60 * 1000 
-    });
-    res.json({ user });
-  } catch (error) {
-    res.status(500).json({ error: 'Verification failed' });
   }
 };
 
@@ -173,15 +100,8 @@ export const login = async (req: Request, res: Response) => {
       return res.status(400).json({ error: 'Invalid email or password' });
     }
 
-    console.log('[Login] Provided password length:', password?.length);
-    console.log('[Login] Stored hash length:', user.hashed_password.length);
-    console.log('[Login] Stored hash start:', user.hashed_password.substring(0, 7));
-
     const isMatch = await bcrypt.compare(password, user.hashed_password);
-    console.log('[Login] bcrypt.compare result:', isMatch);
-
     if (!isMatch) {
-      console.log('[Login] Password mismatch');
       return res.status(400).json({ error: 'Invalid email or password' });
     }
 

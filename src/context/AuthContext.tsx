@@ -20,8 +20,6 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<boolean>;
   signup: (name: string, email: string, password: string, phone?: string) => Promise<boolean>;
   googleLogin: (credential: string) => Promise<boolean>;
-  sendOtp: (phoneNumber: string) => Promise<boolean>;
-  verifyOtp: (phoneNumber: string, otp: string) => Promise<boolean>;
   logout: () => void;
   updateProfile: (data: { 
     name?: string; 
@@ -105,7 +103,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         console.log('[AuthContext] Signup success, user:', data.user.id);
         setUser(data.user);
         toast.success("Account created successfully!");
-        // Small delay to ensure toast is visible before modal closes
         setTimeout(() => setIsLoginOpen(false), 500);
         return true;
       } else {
@@ -141,50 +138,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
     } catch (err) {
       console.error('[AuthContext] Google Login exception:', err);
-      toast.error("Something went wrong");
-      return false;
-    }
-  };
-
-  const sendOtp = async (phoneNumber: string): Promise<boolean> => {
-    try {
-      const res = await fetch("/api/auth/phone/send-otp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phoneNumber }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        toast.success(data.message || "OTP sent successfully!");
-        return true;
-      } else {
-        toast.error(data.error || "Failed to send OTP");
-        return false;
-      }
-    } catch (err) {
-      toast.error("Something went wrong");
-      return false;
-    }
-  };
-
-  const verifyOtp = async (phoneNumber: string, otp: string): Promise<boolean> => {
-    try {
-      const res = await fetch("/api/auth/phone/verify-otp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phoneNumber, otp }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setUser(data.user);
-        setIsLoginOpen(false);
-        toast.success("Phone verified!");
-        return true;
-      } else {
-        toast.error(data.error || "Invalid OTP");
-        return false;
-      }
-    } catch (err) {
       toast.error("Something went wrong");
       return false;
     }
@@ -237,8 +190,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         login,
         signup,
         googleLogin,
-        sendOtp,
-        verifyOtp,
         logout,
         updateProfile,
         isLoginOpen,

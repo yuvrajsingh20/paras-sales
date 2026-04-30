@@ -1,17 +1,17 @@
 import { useState } from "react";
-import { X, Eye, EyeOff, User, Mail, Phone, Lock, MessageSquare } from "lucide-react";
+import { X, Eye, EyeOff, User, Mail, Lock } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import parasJiLogo from "@/assets/paras-ji-logo.png";
 import { GoogleLogin } from "@react-oauth/google";
 
-type AuthMode = "options" | "email-login" | "email-signup" | "phone-entry" | "phone-otp";
+type AuthMode = "options" | "email-login" | "email-signup";
 
 export const LoginModal = () => {
-  const { login, signup, googleLogin, sendOtp, verifyOtp, isLoginOpen, setIsLoginOpen } = useAuth();
+  const { login, signup, googleLogin, isLoginOpen, setIsLoginOpen } = useAuth();
   const [mode, setMode] = useState<AuthMode>("options");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", password: "", phone: "", otp: "" });
+  const [form, setForm] = useState({ name: "", email: "", password: "" });
 
   if (!isLoginOpen) return null;
 
@@ -21,23 +21,8 @@ export const LoginModal = () => {
     if (mode === "email-login") {
       await login(form.email, form.password);
     } else {
-      await signup(form.name, form.email, form.password, form.phone);
+      await signup(form.name, form.email, form.password);
     }
-    setLoading(false);
-  };
-
-  const handlePhoneSend = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    const success = await sendOtp(form.phone);
-    if (success) setMode("phone-otp");
-    setLoading(false);
-  };
-
-  const handlePhoneVerify = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    await verifyOtp(form.phone, form.otp);
     setLoading(false);
   };
 
@@ -86,15 +71,11 @@ export const LoginModal = () => {
               {mode === "options" && "Get Started"}
               {mode === "email-login" && "Welcome back!"}
               {mode === "email-signup" && "Create account"}
-              {mode === "phone-entry" && "Login with Phone"}
-              {mode === "phone-otp" && "Verify Phone"}
             </h2>
             <p className="text-muted-foreground text-sm">
               {mode === "options" && "Choose your preferred method to continue"}
               {mode === "email-login" && "Enter your email and password"}
               {mode === "email-signup" && "Join us today for exclusive benefits"}
-              {mode === "phone-entry" && "We'll send you a verification code"}
-              {mode === "phone-otp" && `Enter the code sent to ${form.phone}`}
             </p>
           </div>
 
@@ -128,14 +109,6 @@ export const LoginModal = () => {
                     <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
                   </div>
                 </div>
-
-                <button
-                  onClick={() => setMode("phone-entry")}
-                  className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl border border-input bg-background hover:bg-muted transition-all font-medium"
-                >
-                  <Phone className="h-5 w-5 text-brand-600" />
-                  <span>Phone Number</span>
-                </button>
 
                 <button
                   onClick={() => setMode("email-login")}
@@ -209,62 +182,6 @@ export const LoginModal = () => {
                     className="text-sm text-brand-600 font-semibold hover:underline"
                   >
                     {mode === "email-login" ? "Need an account? Sign up" : "Already have an account? Login"}
-                  </button>
-                </div>
-              </form>
-            )}
-
-            {mode === "phone-entry" && (
-              <form onSubmit={handlePhoneSend} className="space-y-4 animate-in">
-                <div className="relative group">
-                  <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-brand-600 transition-colors" />
-                  <input
-                    type="tel"
-                    placeholder="Phone Number (e.g. +91...)"
-                    value={form.phone}
-                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                    className="w-full pl-10 pr-4 py-3 rounded-xl border border-input bg-card text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all font-medium"
-                    required
-                  />
-                </div>
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full py-3.5 px-4 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold shadow-lg shadow-brand-500/20 hover:shadow-brand-500/30 transition-all disabled:opacity-70 active:scale-[0.98]"
-                >
-                  {loading ? "Sending..." : "Send Verification Code"}
-                </button>
-              </form>
-            )}
-
-            {mode === "phone-otp" && (
-              <form onSubmit={handlePhoneVerify} className="space-y-4 animate-in">
-                <div className="relative group">
-                  <MessageSquare className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-brand-600 transition-colors" />
-                  <input
-                    type="text"
-                    placeholder="6-digit Code"
-                    value={form.otp}
-                    onChange={(e) => setForm({ ...form, otp: e.target.value })}
-                    className="w-full pl-10 pr-4 py-4 rounded-xl border border-input bg-card text-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all tracking-[0.5em] text-center font-bold"
-                    maxLength={6}
-                    required
-                  />
-                </div>
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full py-3.5 px-4 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold shadow-lg shadow-brand-500/20 hover:shadow-brand-500/30 transition-all disabled:opacity-70 active:scale-[0.98]"
-                >
-                  {loading ? "Verifying..." : "Verify OTP"}
-                </button>
-                <div className="text-center">
-                  <button
-                    type="button"
-                    onClick={() => setMode("phone-entry")}
-                    className="text-sm text-brand-600 font-semibold hover:text-brand-700 hover:underline transition-colors"
-                  >
-                    Resend Code
                   </button>
                 </div>
               </form>
