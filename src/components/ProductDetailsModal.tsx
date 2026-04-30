@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { X, ShoppingCart, Heart, Leaf, ShieldCheck, Award, Info, ChefHat } from "lucide-react";
 import { Product, ProductVariant } from "@/data/products";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
+import { useAuth } from "@/context/AuthContext";
+import { toast } from "sonner";
 import productPapad from "@/assets/product-papad.jpg";
 import productSevaiyan from "@/assets/product-sevaiyan.jpg";
 import productPapadi from "@/assets/product-papadi.jpg";
@@ -27,9 +30,11 @@ export const ProductDetailsModal = ({ product, isOpen, onClose }: ProductDetails
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(
     product?.variants[0] || null
   );
-  const [activeTab, setActiveTab] = useState<"cooking" | "nutrition">("cooking");
+  const [activeTab, setActiveTab] = useState<"cooking" | "nutrition" | "ingredients">("cooking");
   const { addToCart } = useCart();
   const { toggleWishlist, isWishlisted } = useWishlist();
+  const { user, setIsLoginOpen } = useAuth();
+  const navigate = useNavigate();
 
   if (!product || !isOpen) return null;
 
@@ -51,7 +56,25 @@ export const ProductDetailsModal = ({ product, isOpen, onClose }: ProductDetails
       weight: currentVariant.weight,
       image: product.category,
     });
-    // Optional: close on add or show feedback
+    toast.success(`${product.name} added to cart`);
+  };
+
+  const handleBuyNow = () => {
+    if (!user) {
+      setIsLoginOpen(true);
+      return;
+    }
+
+    addToCart({
+      productId: product.id,
+      variantId: currentVariant.id,
+      name: product.name,
+      variantName: currentVariant.name,
+      price: currentVariant.price,
+      weight: currentVariant.weight,
+      image: product.category,
+    });
+    navigate("/checkout");
   };
 
   return (
@@ -141,23 +164,32 @@ export const ProductDetailsModal = ({ product, isOpen, onClose }: ProductDetails
           </div>
 
           {/* Primary Action Button - Nicely Visible Words */}
-          <div className="flex items-center gap-4 mb-10 pt-6 border-t border-border/50">
-            <div className="flex-1">
-               <button
-                 onClick={handleAddToCart}
-                 className="w-full btn-primary py-5 rounded-2xl flex items-center justify-center gap-3 text-lg font-black uppercase tracking-widest shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
-               >
-                 <ShoppingCart className="h-6 w-6" />
-                 Add to Cart — ₹{currentVariant.price}
-               </button>
+          <div className="flex flex-col gap-4 mb-10 pt-6 border-t border-border/50">
+            <div className="flex items-center gap-4">
+              <div className="flex-1">
+                <button
+                  onClick={handleBuyNow}
+                  className="w-full bg-primary text-white py-5 rounded-2xl flex items-center justify-center gap-3 text-lg font-black uppercase tracking-widest shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
+                >
+                  Buy Now — ₹{currentVariant.price}
+                </button>
+              </div>
+              <button
+                onClick={() => toggleWishlist({ productId: product.id, name: product.name, price: currentVariant.price, image: product.category })}
+                className={`p-5 rounded-2xl border-2 transition-all duration-300 ${
+                  wishlisted ? "bg-primary border-primary text-white shadow-lg" : "border-border text-muted-foreground hover:border-primary/30"
+                }`}
+              >
+                <Heart className={`h-6 w-6 ${wishlisted ? "fill-current" : ""}`} />
+              </button>
             </div>
+            
             <button
-               onClick={() => toggleWishlist({ productId: product.id, name: product.name, price: currentVariant.price, image: product.category })}
-               className={`p-5 rounded-2xl border-2 transition-all duration-300 ${
-                 wishlisted ? "bg-primary border-primary text-white shadow-lg" : "border-border text-muted-foreground hover:border-primary/30"
-               }`}
+              onClick={handleAddToCart}
+              className="w-full bg-secondary text-foreground py-4 rounded-2xl flex items-center justify-center gap-3 text-sm font-black uppercase tracking-widest border border-border/50 hover:bg-secondary/80 transition-all"
             >
-              <Heart className={`h-6 w-6 ${wishlisted ? "fill-current" : ""}`} />
+              <ShoppingCart className="h-5 w-5" />
+              Add to Cart
             </button>
           </div>
 
@@ -181,6 +213,15 @@ export const ProductDetailsModal = ({ product, isOpen, onClose }: ProductDetails
               >
                 Nutritional Info
                 {activeTab === "nutrition" && <div className="absolute bottom-0 left-0 right-0 h-1 bg-primary rounded-t-full" />}
+              </button>
+              <button 
+                onClick={() => setActiveTab("ingredients")}
+                className={`pb-3 text-xs font-black uppercase tracking-widest transition-all relative ${
+                  activeTab === "ingredients" ? "text-primary" : "text-muted-foreground hover:text-primary/60"
+                }`}
+              >
+                Ingredients
+                {activeTab === "ingredients" && <div className="absolute bottom-0 left-0 right-0 h-1 bg-primary rounded-t-full" />}
               </button>
             </div>
 
@@ -206,21 +247,38 @@ export const ProductDetailsModal = ({ product, isOpen, onClose }: ProductDetails
                     </div>
                   </div>
                 </div>
-              ) : (
+              ) : activeTab === "nutrition" ? (
                 <div className="grid grid-cols-2 gap-x-8 gap-y-3">
                    {[
-                      { label: "Energy Value", value: "319.2 Kcal" },
-                      { label: "Protein", value: "11.80g" },
-                      { label: "Carbohydrate", value: "63.15g" },
-                      { label: "Total Fat", value: "2.15g" },
+                      { label: "Energy Value", value: product.nutrition?.calories || "319.2 Kcal" },
+                      { label: "Protein", value: product.nutrition?.protein || "11.80g" },
+                      { label: "Carbohydrate", value: product.nutrition?.carbs || "63.15g" },
+                      { label: "Total Fat", value: product.nutrition?.fat || "2.15g" },
                       { label: "Sugar", value: "0.0g" },
-                      { label: "Fiber", value: "14.40g" },
+                      { label: "Fiber", value: product.nutrition?.fiber || "14.40g" },
+                      { label: "Sodium", value: product.nutrition?.sodium || "900mg" },
+                      { label: "Calcium", value: product.nutrition?.calcium || "40mg" },
+                      { label: "Iron", value: product.nutrition?.iron || "3mg" },
+                      ...(product.nutrition?.garlic ? [{ label: "Garlic", value: product.nutrition.garlic }] : []),
                    ].map(item => (
                      <div key={item.label} className="flex justify-between items-center text-[11px] border-b border-border/30 pb-1.5 last:border-0">
                         <span className="text-muted-foreground font-bold">{item.label}</span>
-                        <span className="text-foreground font-black">{item.value}</span>
+                        <span className="text-foreground font-black text-right ml-2">{item.value}</span>
                      </div>
                    ))}
+                   <p className="col-span-2 text-[9px] text-muted-foreground italic mt-2">
+                     * Values are approximate per 100g of raw product.
+                   </p>
+                </div>
+              ) : (
+                <div className="flex flex-wrap gap-2">
+                  {product.ingredients?.map((ingredient, index) => (
+                    <span key={index} className="px-3 py-1.5 bg-secondary/40 text-secondary-foreground text-[10px] font-bold uppercase rounded-lg border border-border/30">
+                      {ingredient}
+                    </span>
+                  )) || (
+                    <p className="text-muted-foreground italic text-xs">Authentic traditional ingredients used.</p>
+                  )}
                 </div>
               )}
             </div>
